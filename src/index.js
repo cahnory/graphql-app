@@ -1,14 +1,24 @@
-import koa from 'koa';
+import koa    from 'koa';
 import router from 'koa-router';
+import serve  from 'koa-static';
 
-import graphql from './app/graphql';
-import browserify from './app/browserify';
-import renderer from './app/renderer';
+import browserify from './http/browserify';
+import graphql    from './http/graphql';
+import renderer   from './http/renderer';
+import sass       from './http/sass';
 
-var app = koa();
+const app = koa();
+const httpdoc = __dirname + '/../public';
+const styles  = '/assets/css';
 
 
 app
+.use(serve(httpdoc))
+.use(sass({
+  src:    __dirname + '/styles/',
+  dest:   httpdoc + styles,
+  prefix: styles
+}))
 .use(router().get('/graphql', graphql()).routes())
 .use(router().get('/assets/js/:filename', browserify()).routes())
 .use(renderer());
