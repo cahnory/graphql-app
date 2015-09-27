@@ -1,0 +1,9 @@
+@mixin sprite($name) {
+  background: data('sprites.#{$name}.background');
+  height:     data('sprites.#{$name}.height');
+  width:      data('sprites.#{$name}.width');
+}
+
+@function sprite($name, $property: null) {
+  @return if($property, data('sprites.#{$name}.#{$property}'), data('sprites.#{$name}'));
+}

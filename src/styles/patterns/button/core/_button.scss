@@ -1,0 +1,21 @@
+/// Button pattern
+///
+/// @group patterns
+/// @access public
+@mixin p-button() {
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  *font-size: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}

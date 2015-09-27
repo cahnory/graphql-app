@@ -1,0 +1,12 @@
+/// invert grid order
+/// 
+/// @group patterns
+/// @access public
+@mixin p-grid---invert($dir: ltr) {
+  @if assert($dir,  ('one-of': (ltr, rtl))) {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    direction: if(ltr == $dir, rtl, ltr);
+    -ms-writing-mode: if(ltr == $dir, rl-bt, lr-tb);
+  }
+}

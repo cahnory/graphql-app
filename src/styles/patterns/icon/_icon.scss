@@ -1,0 +1,35 @@
+// Mixins
+// ========================================================================== //
+@import 'core/icon';
+
+@import 'modifiers/alone';
+@import 'modifiers/center';
+@import 'modifiers/left';
+@import 'modifiers/right';
+
+
+@include once('p-icon') {
+  // Settings
+  // ========================================================================== //
+  $cfg:     'patterns.icon';
+  @include  data-default('#{$cfg}', (
+    font: 'FontAwesome'
+  ));
+  
+  $font: data('#{$cfg}.font');
+  
+  // Placeholders
+  // ========================================================================== //
+  %p-icon { @include p-icon($font); }
+  
+  @include modifier() {
+    // current selector media suffix
+    // (could be blank if not in @media)
+    $media: modifier-media();
+  
+    %p-icon--alone#{$media}   { @include p-icon---alone(); }
+    %p-icon--center#{$media}  { @include p-icon---center(); }
+    %p-icon--left#{$media}    { @include p-icon---left(); }
+    %p-icon--right#{$media}   { @include p-icon---right(); }
+  }
+}

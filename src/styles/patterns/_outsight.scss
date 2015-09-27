@@ -1,0 +1,19 @@
+@mixin p-outsight {
+  position: absolute;
+  left: auto;
+  top: auto;
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 1px;
+  opacity: 0.01;
+}
+
+@include once('p-outsight') {
+  %p-outsight {
+    @include p-outsight();
+  }
+}

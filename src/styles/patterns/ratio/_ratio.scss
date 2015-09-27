@@ -1,0 +1,45 @@
+// Dependencies
+// ========================================================================== //
+@import 'patterns/inliner/inliner';
+
+// Mixins
+// ========================================================================== //
+@import 'core/content';
+@import 'core/ratio';
+
+@import 'modifiers/ratio';
+
+@include once('p-ratio') {
+  // Settings
+  // ========================================================================== //
+  $cfg:     'patterns.ratio';
+  @include  data-default('#{$cfg}', (
+    '16-9':   16 / 9,
+    scope:  2.39,
+    square: 1
+  ));
+  
+  $ratios:  data('#{$cfg}');
+  
+  // Placeholders
+  // ========================================================================== //
+  %p-ratio { @include p-ratio(); }
+  %p-ratio__content { @include p-ratio__content(); }
+
+  @include modifier() {
+    // current selector media suffix
+    // (could be blank if not in @media)
+    $media: modifier-media();
+
+    @include vary-value($ratios) {
+      // current selector property suffix
+      $name:  modifier-prop();
+      // size of the gutter
+      $ratio: vary-value();
+
+      %p-ratio--ratio#{$name}#{$media} {
+        @include p-ratio---ratio($ratio);
+      }
+    }
+  }
+}

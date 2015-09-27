@@ -1,0 +1,20 @@
+/// slide
+/// 
+/// @group patterns
+/// @access public
+@mixin p-slider__slide($speed: 0, $delay: 0) {
+  @if assert($speed,  (type: 'number', gte: 0))
+  and assert($delay,  (type: 'number', gte: 0)) {
+    margin-left: -100%;
+    transition: all $speed $delay, visibility 0s $speed + $delay;
+    visibility: hidden;
+    white-space: normal;
+    width: 100%;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    @extend %p-inliner__item;
+  }
+}

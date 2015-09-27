@@ -1,0 +1,23 @@
+.o-context {
+  @extend %p-context;
+
+  @include modifier() {
+    $media: modifier-media();
+    
+    &.\--left#{$media} {
+      @extend %p-context--left;
+    }
+    &.\--center#{$media} {
+      @extend %p-context--center;
+    }
+    &.\--right#{$media} {
+      @extend %p-context--right;
+    }
+    &.\--inline#{$media} {
+      @extend %p-context--inline;
+    }
+    &.\--block#{$media} {
+      @extend %p-context--block;
+    }
+  }
+}

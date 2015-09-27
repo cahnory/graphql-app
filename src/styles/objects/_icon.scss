@@ -1,0 +1,27 @@
+// Settings
+// ========================================================================== //
+$cfg: 'patterns.icon';
+$font:  data('#{$cfg}.font');
+
+// Styles
+// ========================================================================== //
+.o-icon {
+  @extend %p-icon;
+
+  @include modifier() {
+    $media: modifier-media();
+  
+    &.\--alone#{$media} {
+      @extend %p-icon--alone#{$media};
+    }
+    &.\--center#{$media} {
+      @extend %p-icon--right#{$media};
+    }
+    &.\--left#{$media} {
+      @extend %p-icon--left#{$media};
+    }
+    &.\--right#{$media} {
+      @extend %p-icon--right#{$media};
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@mixin p-ratio() {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 100%;
+  }
+}

@@ -1,0 +1,25 @@
+$light:   #FFF;
+$dark:    #4C4C4C;
+$darker:  #262626;
+$darker-light: #D9D9D9;
+$line-height: assert(data('objects.form.line-height'), (type: 'number'));
+
+.o-form-text {
+  @extend %p-input;
+
+  background: $dark;
+  display: block;
+  border-radius: 0.625em;
+  color: $light;
+  padding: .625em;
+  transition: all .2s, height 0s; // resize textarea normally
+  max-width: 100%; // too many issue when resizing textarea and then viewport
+  min-width: 100%; // ...
+  width: 100%;
+
+  &:focus {
+    background: $darker-light;
+    color: $darker;
+    outline: none;
+  }
+}

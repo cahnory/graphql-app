@@ -1,0 +1,10 @@
+/// Inliner pattern
+///
+/// @group patterns
+/// @access public
+@mixin p-inliner {
+  display: table;
+  display: block\0;
+  width: 100%;
+  letter-spacing: -2em;
+}

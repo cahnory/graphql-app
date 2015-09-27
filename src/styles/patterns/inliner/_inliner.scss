@@ -1,0 +1,12 @@
+// Mixins
+// ========================================================================== //
+@import 'core/inliner';
+@import 'core/item';
+
+
+@include once('p-inliner') {
+  // Placeholders
+  // ========================================================================== //
+  %p-inliner       { @include p-inliner(); }
+  %p-inliner__item { @include p-inliner__item(); }
+}

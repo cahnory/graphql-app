@@ -1,0 +1,20 @@
+/// Inliner item
+/// 
+/// @group patterns
+/// @access public
+@mixin p-inliner__item {
+  display: inline-block;
+  vertical-align: top;
+  letter-spacing: normal;
+
+  // IE 7
+  *display: inline;
+  *zoom: 1;
+
+  // Dolphin browser
+  // Fix width 100% for Children of display table elements
+  &:before {
+    content: '';
+    display: block;
+  }
+}

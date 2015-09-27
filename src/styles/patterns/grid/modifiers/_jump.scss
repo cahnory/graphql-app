@@ -1,0 +1,10 @@
+/// grid cell jump
+///
+/// @group patterns
+/// @access public
+@mixin p-grid__cell---jump($length, $max) {
+  @if assert($length, (type: 'number', gte: 0))
+  and assert($max,    (type: 'number', gt: $length)) {
+    margin-left: 100% / $max * $length;
+  }
+}

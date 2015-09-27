@@ -1,0 +1,46 @@
+// Dependencies
+// ========================================================================== //
+@import 'patterns/inliner/inliner';
+
+@include once('p-nav') {
+  // Placeholders
+  // ========================================================================== //
+  %p-nav__list {
+    @extend %p-inliner;
+    padding: 0;
+    margin: 0;
+  }
+  %p-nav__item {
+    @extend %p-inliner__item;
+    box-sizing: border-box;
+    list-style: none;
+  }
+  
+  @include modifier() {
+    $media: modifier-media();
+  
+    %p-nav--expanded#{$media} {
+      display: block;
+    }
+    %p-nav--collapsed#{$media} {
+      display: none;
+    }
+    
+    %p-nav__item--inline#{$media} {
+      display: inline-block;
+      flex-grow: 0;
+      width: auto;
+    }
+    %p-nav__item--block#{$media} {
+      display: inline-block;
+      flex-grow: 0;
+      width: 100%;
+    }
+    %p-nav__item--cell#{$media} {
+      display: table-cell;
+      flex-grow: 1;
+      width: auto;
+    }
+  
+  }
+}

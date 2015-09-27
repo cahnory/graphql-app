@@ -1,0 +1,20 @@
+.o-image {
+  @extend %p-image;
+
+  @include modifier() {
+    $media: modifier-media();
+    
+    &.\--auto#{$media}  { @extend %p-image--auto#{$media}; }
+    &.\--fluid#{$media} { @extend %p-image--fluid#{$media}; }
+    &.\--fill#{$media}  { @extend %p-image--fill#{$media}; }  
+    &.\--full#{$media}  { @extend %p-image--full#{$media}; } 
+
+  }
+}
+
+.o-image__wrap {
+  @extend %p-image__wrap;
+}
+.o-image img {
+  @extend %p-image__img;
+}

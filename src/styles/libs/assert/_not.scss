@@ -1,0 +1,14 @@
+/// Assert that $value is not in $excluded
+///
+/// @access public
+/// @group libs
+/// @param {*} $value
+/// @param {*} $excluded
+@function assert-not($value, $excluded...) {
+  @each $exc in $excluded {
+    @if $value == $exc {
+      @return assert-error('not', $value, (exluded: $excluded));
+    }
+  }
+  @return $value;
+}

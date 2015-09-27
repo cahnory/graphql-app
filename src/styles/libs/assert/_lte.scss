@@ -1,0 +1,13 @@
+/// Assert that $value is lower than or equal $limit
+///
+/// @access public
+/// @group libs
+/// @param {Number} $value
+/// @param {Number} $limit
+@function assert-lte($value, $limit) {
+  @if $value <= $limit {
+    @return $value;
+  }
+
+  @return assert-error('lte', $value, (limit: $limit));
+}

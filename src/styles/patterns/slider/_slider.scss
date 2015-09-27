@@ -1,0 +1,49 @@
+// Dependencies
+// ========================================================================== //
+@import 'patterns/inliner/inliner';
+
+// Mixins
+// ========================================================================== //
+@import 'core/slide';
+@import 'core/slider';
+
+@import 'modifiers/current';
+@import 'modifiers/fade';
+@import 'modifiers/slide';
+@import 'modifiers/stack';
+
+
+@include once('p-slider') {
+  // Settings
+  // ========================================================================== //
+  $cfg:     'patterns.slider';
+  @include  data-default('#{$cfg}', (
+    speed: .4,
+    delay: 0
+  ));
+
+  $speed: data('#{$cfg}.speed');
+  $delay: data('#{$cfg}.delay');
+
+  // Placeholders
+  // ========================================================================== //
+  %p-slider                 { @include p-slider(); }
+  %p-slider__slide          { @include p-slider__slide($speed, $delay); }
+  %p-slider__slide--current { @include p-slider__slide---current($speed, $delay); }
+
+  @include modifier() {
+    $media: modifier-media();
+  
+    %p-slider--fade#{$media}            { @include p-slider---fade(); }
+    %p-slider--fade__current#{$media}   { @include p-slider---fade__current(); }
+    %p-slider--fade__next#{$media}      { @include p-slider---fade__next(); }
+    
+    %p-slider--slide#{$media}           { @include p-slider---slide(); }
+    %p-slider--slide__current#{$media}  { @include p-slider---slide__current(); }
+    %p-slider--slide__next#{$media}     { @include p-slider---slide__next(); }
+    
+    %p-slider--stack#{$media}           { @include p-slider---stack(); }
+    %p-slider--stack__current#{$media}  { @include p-slider---stack__current(); }
+    %p-slider--stack__next#{$media}     { @include p-slider---stack__next(); }
+  }
+}

@@ -1,0 +1,14 @@
+/// slider slide transition
+/// 
+/// @group patterns
+/// @access public
+@mixin p-slider---slide() {
+  position: relative;
+  left: -100%;
+}
+@mixin p-slider---slide__current() {
+  left: 0;
+}
+@mixin p-slider---slide__next() {
+  left: 100%;
+}

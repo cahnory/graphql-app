@@ -1,0 +1,8 @@
+/// Button block
+/// 
+/// @group patterns
+/// @access public
+@mixin p-button---block() {
+  display: block;
+  width: 100%;
+}

@@ -1,0 +1,10 @@
+/// grid cell span
+///
+/// @group patterns
+/// @access public
+@mixin p-grid__cell---span($length, $max) {
+  @if assert($length, (type: 'number', gt: 0))
+  and assert($max,    (type: 'number', gte: $length)) {
+    width: 100% / $max * $length;
+  }
+}

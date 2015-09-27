@@ -1,0 +1,49 @@
+// Settings
+// ========================================================================== //
+$cfg: 'global';
+$line-height:   assert(data('#{$cfg}.line-height'),   (type: 'number', default: 1.35));
+
+$head-max:      assert(data('#{$cfg}.head-max'),      (type: 'number', default: 2));
+$head-min:      assert(data('#{$cfg}.head-min'),      (type: 'number', default: 1.15));
+$head-top:      assert(data('#{$cfg}.head-top'),      (type: 'number', default: 2));
+$head-bottom:   assert(data('#{$cfg}.head-bottom'),   (type: 'number', default: 1));
+
+$block-top:     assert(data('#{$cfg}.block-top'),     (type: 'number', default: 2));
+$block-bottom:  assert(data('#{$cfg}.block-bottom'),  (type: 'number', default: 1));
+
+// Styles
+// ========================================================================== //
+h1, h2, h3, h4, h5, h6 {
+  font-family: data('fonts.head');
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    $head-size: $head-min + ($head-max - $head-min) / 6 * (7 - $i);
+    @include flow-head($head-size, $line-height, $head-top, $head-bottom);
+  }
+}
+
+p, pre, blockquote, dl, ol, ul, table, hr {
+  @include flow(1, $line-height, $block-top, $block-bottom);
+}
+
+hr {
+  border: 0 solid;
+  border-width: 0 0 1px;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%
+}
+
+a img {
+  border: none;
+}
+
+abbr {
+  border-bottom: 1px dotted;
+  cursor: help;
+}

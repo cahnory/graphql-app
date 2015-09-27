@@ -1,0 +1,89 @@
+@import 'node';
+@import 'global';
+
+@function data($path: null, $args...) {
+  $args: prepend($args, $path);
+  @if length($args) > 1 or 'map' == type-of(nth($args, 1)) {
+    @return data-set($args...);
+  }
+  @return data-get($args...);
+}
+
+/// @alias data
+@mixin data($args...) {
+  @if data($args...){}
+}
+
+@function data-default($path, $input: null, $node: null) {
+  @return data-set($path, $input, $node, true);
+}
+
+@mixin data-default($path, $input: null, $node: null) {
+  @if data-set($path, $input, $node, true){}
+}
+
+@function data-set($path, $input: null, $node: null, $default: false) {
+  $output:  $node;
+
+  // set multiple keys using a map value
+  @if 'map' == type-of($path) {
+    @each $key, $value in $path {
+      $output: data-set($key, $value, $input or $node, $default);
+    }
+  }
+  // trying to set a non map as global
+  @else if 'string' != type-of($path) {
+    @error 'data-set accepts a string path or a map value as first parameter.';
+  }
+  @else if not $default or null == data-get($path, $node or data-global()) {
+    $keys:  data-get-path($path, $node, 1);
+    $node: $node or data-global();
+
+    //@if not $default or data-get($)
+    // get updated child tree
+    @if length($keys) > 1 {
+      $input: data-set(nth($keys, 2), $input, data-node-get($node, nth($keys, 1)), $default);
+    }
+
+    // replace child
+    $output: data-node-set($node, nth($keys, 1), data-node($input));
+
+    // update global if needed 
+    @if data-is_global($node) {
+      @if data-global-replace($output) {}
+    }
+  }
+
+  @return $output;
+}
+
+@function data-get($path: null, $data: data-global()) {
+  @if 'string' != type-of($path) and $path != null {
+    @error 'argument `$path` of `data-get($path, $data)` must be a string';
+  }
+
+  $node: $data;
+
+  @if null != $path {
+    $keys: data-get-path($path, $data);
+  
+    @while 'undefined' != data-node-type($node) and length($keys) > 0 {
+      $node: data-node-get($node, nth($keys, 1));
+      $keys: shift($keys);
+    }
+  }
+
+  @return data-node-value($node, $data);
+}
+
+@function data-get-path($path, $data: data-global(), $limit: -1) {
+  @if 'string' != type-of($path) {
+    @error ' >   ', $path;
+  }
+
+  @if str-is-pattern($path) {
+    $path: str-apply($path, ('data-node-apply', $data));
+  }
+
+  @return str-split($path, '.', $limit);
+}

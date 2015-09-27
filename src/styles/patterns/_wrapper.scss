@@ -1,0 +1,32 @@
+@include once('p-wrapper') {
+  // Settings
+  // ========================================================================== //
+  $cfg:     'patterns.wrapper';
+
+  @include  data-default('#{$cfg}.width',   1080px);
+  @include  data-default('#{$cfg}.gutter',  40px);
+  $width:   assert(data('#{$cfg}.width'),  ('type': 'number'));
+  $gutter:  assert(data('#{$cfg}.gutter'), ('type': 'number'));
+
+  // Styles
+  // ========================================================================== //
+  @mixin p-wrapper($width, $gutter) {
+    box-sizing: border-box;
+    margin-left:  auto;
+    margin-right: auto;
+    max-width: $width;
+
+    @media (min-width: $width) and (max-width: $width + $gutter * 2) {
+      padding-left: calc(#{$gutter} - (100vw - #{$width}) / 2);
+      padding-right: calc(#{$gutter} - (100vw - #{$width}) / 2);
+    }
+    @media (max-width: $width) {
+      padding-left: $gutter;
+      padding-right: $gutter;
+    }
+  }
+
+  %p-wrapper {
+    @include p-wrapper($width, $gutter);
+  }
+}

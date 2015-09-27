@@ -1,0 +1,10 @@
+/// revert grid order
+/// 
+/// @group patterns
+/// @access public
+@mixin p-grid__cell---dir($dir) {
+  @if assert($dir,  ('one-of': (ltr, rtl))) {
+    -ms-writing-mode: if(ltr == $dir, lr-tb, rl-bt);
+    direction: if(ltr == $dir, ltr, rtl);
+  }
+}

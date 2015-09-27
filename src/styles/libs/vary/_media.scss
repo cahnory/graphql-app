@@ -1,0 +1,22 @@
+// content for all query modifiers map (name: query)
+@mixin vary-media($queries, $none: true) {
+  // No query modifier
+  @if ($none) {
+    @include vary-open(null) {
+      @content;
+    }
+  }
+
+  // Query modifiers
+  @each $name, $query in $queries {
+    @include vary-open($name, $query) {
+      $flat: ();
+      @each $prop, $value in $query {
+        $flat: append($flat, '#{$prop}:#{$value}', comma);
+      }
+      @media (#{$flat}) {
+        @content;
+      }
+    }
+  }
+}

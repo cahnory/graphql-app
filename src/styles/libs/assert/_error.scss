@@ -1,0 +1,11 @@
+@function assert-error($assertion, $value, $args: ()) {
+  @if assert-warn() {
+    @warn
+        'ASSERTION ERROR `#{$assertion}`
+         value: #{if($value != null, $value, 'null')}
+         params: #{$args}
+         ';
+  }
+
+  @return null;
+}

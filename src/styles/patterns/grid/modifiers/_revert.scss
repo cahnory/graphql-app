@@ -1,0 +1,11 @@
+/// revert grid order
+/// 
+/// @group patterns
+/// @access public
+@mixin p-grid---revert($dir) {
+  @if assert($dir,  ('one-of': (ltr, rtl))) {
+    display: table;
+    direction: if(ltr == $dir, ltr, rtl);
+    -ms-writing-mode: normal;
+  }
+}

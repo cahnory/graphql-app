@@ -1,0 +1,9 @@
+/// Assert that at least 1 assertion in $asserts is correct
+///
+/// @access public
+/// @group libs
+/// @param {*}    $value a value to test
+/// @param {List} $corrects list of correct values
+@function assert-one-of($value, $corrects) {
+  @return assert-nth-of($value, 1, $corrects);
+}

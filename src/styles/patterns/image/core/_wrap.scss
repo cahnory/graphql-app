@@ -1,0 +1,10 @@
+/// Image inner wrap
+///
+/// @group patterns
+/// @access public
+@mixin p-image__wrap() {
+  display: inline;
+  max-width: inherit;
+  min-width: inherit;
+  zoom: 1; // IE 7
+}

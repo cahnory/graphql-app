@@ -1,0 +1,21 @@
+/// Assert that $n assertions in $asserts are correct
+///
+/// @access public
+/// @group libs
+/// @param {*}      $value a value to test
+/// @param {Number} $n minimum of correct assertion
+/// @param {List}   $corrects list of correct values
+@function assert-nth-of($value, $n, $corrects) {
+  $success: 0;
+
+  @each $correct in $corrects {
+    @if $value == $correct {
+      $success: $success + 1;
+    }
+    @if $success >= $n {
+      @return $value;
+    }
+  }
+
+  @return assert-error('nth-of', $value, (n: $n, corrects: $corrects));
+}

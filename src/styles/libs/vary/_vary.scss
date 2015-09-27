@@ -1,0 +1,42 @@
+@import 'inc';
+@import 'media';
+@import 'value';
+
+// return current modifier (query) name
+@function vary-modifier($before: '', $after: '') {
+  $modifier: '';
+
+  @if length($VARY__OPENED) > 0 {
+    $name: nth($VARY__OPENED, length($VARY__OPENED));
+
+    @if $name and str-length('#{$name}') > 0 {
+      $modifier: '#{$before}#{$name}#{$after}';
+    }
+  }
+  @return $modifier;
+}
+
+@function vary-value() {
+  $value: null;
+
+  @if length($VARY__VALUES) > 0 {
+    $value: nth($VARY__VALUES, length($VARY__VALUES));
+  }
+  @return $value;
+}
+
+@mixin vary-open($name: null, $value: null) {
+  $prev: $VARY__OPENED, $VARY__VALUES;
+  $VARY__OPENED: append($VARY__OPENED, $name)!global;
+  $VARY__VALUES: append($VARY__VALUES, $value)!global;
+
+  @content;
+
+  $VARY__OPENED: nth($prev, 1)!global;
+  $VARY__VALUES: nth($prev, 2)!global;
+}
+
+
+// Store currently opened modifiers
+$VARY__OPENED: ()!default;
+$VARY__VALUES: ()!default;

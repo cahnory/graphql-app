@@ -1,0 +1,7 @@
+/// grid
+/// 
+/// @group patterns
+/// @access public
+@mixin p-grid() {
+  @extend %p-inliner;
+}

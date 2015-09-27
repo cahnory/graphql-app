@@ -1,0 +1,30 @@
+@include once('p-rack') {
+  // Settings
+  // ========================================================================== //
+  $cfg: 'patterns.rack';
+  $sizes:  data('#{$cfg}.sizes');
+  
+  // Styles
+  // ========================================================================== //
+  %p-rack {
+    table-layout: fixed;
+    border-spacing: 0;
+    display: table;
+    width: 100%;
+  }
+  
+  // ELEMENTS ------------------------------------------------- //
+  %p-rack__item {
+    display: table-cell;
+    border-spacing: 0;
+  }
+  
+  // MODIFIERS ------------------------------------------------ //
+  %p-rack--gutter {
+    @include vary-value($sizes) {
+      &#{vary-modifier('-')} {
+        border-spacing: vary-value() 0;
+      }
+    }
+  }
+}

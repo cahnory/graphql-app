@@ -1,0 +1,69 @@
+////
+/// map manipulation functions
+/// @group libs
+/// @author François Germain
+////
+
+/// @param {map} $map1
+/// @param {map} $map2
+@function map-extend($map1, $map2, $callback: null) {
+  @each $key, $value in $map2 {
+    $prev: map-get($map1, $key);
+
+    // extend function provided
+    @if $callback != null {
+      $value: call($callback, $prev, $value);
+    }
+    // extends maps values if both are map
+    @elseif ('map' == type-of($value) and 'map' == type-of($prev)) {
+      $value: map-extend($prev, $value);
+    }
+    $map1: map-set($map1, $key, $value);
+  }
+
+  @return $map1;
+}
+
+/// Reduce map to the defined keys
+///
+/// @param {map} $map
+/// @param {list} $keys...
+@function map-extract($map, $keys...) {
+  $res: ();
+
+  @each $key in $keys {
+    @if map-has-key($map, $key) {
+      $res: map-set($res, $key, map-get($map, $key));
+    }
+  }
+
+  @return $res;
+}
+
+/// Reduce map to the defined keys
+///
+/// @param {map} $map
+/// @param {list} $keys...
+@function map-deep($map, $keys...) {
+  $res: $map;
+
+  @each $key in $keys {
+    @if 'map' == type-of($res) and map-has-key($res, $key) {
+      $res: map-get($res, $key);
+    }
+    @else {
+      $res: null;
+    }
+  }
+
+  @return $res;
+}
+
+/// Set a value of a map using its key
+@function map-set($map, $key, $value) {
+  @return map-merge($map, ($key: $value));
+}
+
+@function map-new() {
+  @return map-merge((), ());
+}

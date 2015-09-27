@@ -1,0 +1,12 @@
+@mixin modifier($medias: null) {
+  @include vary-media($medias or assert(data('medias'), ('type': 'map'))) {
+    @content;
+  }
+}
+@function modifier-media() {
+  @return vary-modifier('\\@');
+}
+
+@function modifier-prop() {
+  @return vary-modifier('-');
+}

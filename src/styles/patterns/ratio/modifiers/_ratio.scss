@@ -1,0 +1,5 @@
+@mixin p-ratio---ratio($ratio) {
+  &:before {
+    padding-top: 1 / $ratio * 100%;
+  }
+}

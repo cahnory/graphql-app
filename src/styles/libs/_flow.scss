@@ -1,0 +1,13 @@
+@mixin flow($font, $line, $top: 1, $bottom: 1) {
+  $margin: $line * 1em / $font;
+  @if $top == $bottom {
+    margin: $margin * $top 0;
+  } @else {
+    margin: $margin * $top 0 $margin * $bottom;
+  }
+}
+
+@mixin flow-head($font, $line, $top: 1, $bottom: 1) {
+  font-size: $font * 1em;
+  @include flow($font, $line, $top, $bottom);
+}

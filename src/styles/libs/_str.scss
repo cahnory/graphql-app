@@ -1,0 +1,67 @@
+@function str-apply($pattern, $callback) {
+  @if 'string' != type-of($pattern) {
+    @error 'argument `$pattern` of `str-apply($pattern, $callback)` must be a string';
+  }
+
+  $left: str-index($pattern, '${');
+
+  @if $left {
+    $right: $left + str-index(str-slice($pattern, $left), '}') - 1;
+    @if ($right) {
+      $before:  str-slice($pattern, 1, $left - 1);
+      $exp:     str-slice($pattern, $left + 2, $right - 1);
+      $after:   str-apply(str-slice($pattern, $right + 1), $callback);
+
+      @return call(nth($callback, 1), join(($exp, $before), set-nth($callback, 1, $after))...);
+    }
+  }
+
+  @return $pattern;
+}
+
+@function str-get-pattern($string) {
+  @if 'string' != type-of($string) {
+    @error 'argument `$string` of `str-get-pattern($string)` must be a string';
+  }
+
+  $left: str-index($string, '${');
+
+  @if $left {
+    $right: $left + str-index(str-slice($string, $left), '}') - 1;
+    @if ($right) {
+      @return ($left, $right);
+    }
+  }
+
+  @return false;
+}
+
+@function str-is-pattern($string) {
+  @if 'string' != type-of($string) {
+    @error 'argument `$string` of `str-is-pattern($string)` must be a string';
+  }
+
+  @return str-get-pattern($string) != false;
+}
+
+@function str-split($string, $split, $limit: -1) {
+  @if 'string' != type-of($string) {
+    @error 'argument `$string` of `str-split($string, $split, $limit: -1)` must be a string';
+  }
+  @if 'string' != type-of($split) {
+    @error 'argument `$split` of `str-split($string, $split, $limit: -1)` must be a string';
+  }
+  @if 'number' != type-of($limit) {
+    @error 'argument `$limit` of `str-split($string, $split, $limit: -1)` must be a number';
+  }
+
+  @if $limit != 0 {
+    $index: str-index($string, $split);
+  
+    @if $index {
+      $string: join(str-slice($string, 1, $index - 1), str-split(str-slice($string, $index + str-length($split)), $split, $limit - 1));
+    }
+  }
+
+  @return $string;
+}

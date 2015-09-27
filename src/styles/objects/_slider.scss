@@ -1,0 +1,60 @@
+.o-slider {
+  background: #333;
+
+  @extend %p-slider;
+}
+
+.o-slider__slide {
+  background: #F7F7F7;
+  border: 1px solid #DDD;
+  box-sizing: border-box;
+
+  @extend %p-slider__slide;
+  
+  &.\--current {
+    @extend %p-slider__slide--current;
+  }
+}
+
+@include modifier() {
+  $media: modifier-media();
+
+  .o-slider {
+
+    &.\--fade#{$media}  > {
+      .o-slider__slide {
+        @extend %p-slider--fade#{$media};
+      }
+      .o-slider__slide.\--current {
+        @extend %p-slider--fade__current#{$media};
+      }
+      .o-slider__slide.\--current ~ .o-slider__slide {
+        @extend %p-slider--fade__next#{$media};
+      }
+    }
+
+    &.\--slide#{$media}  > {
+      .o-slider__slide {
+        @extend %p-slider--slide#{$media};
+      }
+      .o-slider__slide.\--current {
+        @extend %p-slider--slide__current#{$media};
+      }
+      .o-slider__slide.\--current ~ .o-slider__slide {
+        @extend %p-slider--slide__next#{$media};
+      }
+    }
+
+    &.\--stack#{$media}  > {
+      .o-slider__slide {
+        @extend %p-slider--stack#{$media};
+      }
+      .o-slider__slide.\--current {
+        @extend %p-slider--stack__current#{$media};
+      }
+      .o-slider__slide.\--current ~ .o-slider__slide {
+        @extend %p-slider--stack__next#{$media};
+      }
+    }
+  }
+}

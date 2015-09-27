@@ -1,0 +1,10 @@
+@mixin p-round {
+  border-radius: 99999px;
+  overflow: hidden;
+}
+
+@include once('p-round') {
+  %p-round {
+    @include p-round();
+  }
+}

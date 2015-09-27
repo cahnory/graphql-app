@@ -1,0 +1,25 @@
+// Settings
+// ========================================================================== //
+$cfg:     'patterns.ratio';
+$ratios:  data('#{$cfg}');
+
+.o-ratio {
+  @extend %p-ratio;
+}
+
+.o-ratio__content {
+  @extend %p-ratio__content;
+}
+
+@include modifier() {
+  $media: modifier-media();
+
+  @include vary-value($ratios) {
+    // current selector property suffix
+    $ratio:  modifier-prop();
+  
+    .o-ratio.\--ratio#{$ratio}#{$media} {
+      @extend %p-ratio--ratio#{$ratio}#{$media};
+    }
+  }
+}

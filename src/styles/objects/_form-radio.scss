@@ -1,0 +1,38 @@
+$light:   #FFFFFF;
+$dark:    #4C4C4C; // first A11Y gray from #FFF
+$darker:  #262626; // between #4C4C4C and #000
+$line-height: assert(data('objects.form.line-height'), (type: 'number'));
+
+.o-form-radio {
+  background: $dark;
+  color: $light;
+  cursor: default;
+  display: table;
+  border-radius: 1.25em;
+  margin: 0 0 0 auto;
+  padding: .25em;
+  padding: .25em + ($line-height - 1) / 2;
+  text-align: center;
+}
+
+.o-form-radio__option {
+  border-radius: 1.375em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1em;
+  padding: .375em;
+  transition: all .2s;
+  vertical-align: middle;
+
+  &:hover {
+    background: $darker;
+  }
+  :checked + & {
+    background: $light;
+    color: $dark;
+  }
+}
+
+.o-form-radio__input {
+  @extend %p-outsight;
+}

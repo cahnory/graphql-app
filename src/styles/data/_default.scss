@@ -1,0 +1,89 @@
+@include data((
+  patterns: (
+    wrap: (
+      width: 1080px
+    ),
+    grid: (
+      max:  24,
+      gutters: (
+        '':   '${patterns.grid.gutters.M}',
+        '0':  0,
+        'XL': 96px,
+        'L':  48px,
+        'M':  24px,
+        'S':  12px,
+        'XS': 6px
+      )
+    ),
+    gutter: (
+      sizes: (
+        '':   '${patterns.gutter.sizes.M}',
+        '0':  0,
+        'XL': 96px,
+        'L':  48px,
+        'M':  24px,
+        'S':  12px,
+        'XS': 6px
+      )
+    ),
+    icon: (
+      font: 'FontAwesome'
+    ),
+    rack: (
+      sizes: '${patterns.gutter.sizes}'
+    ),
+    ratio: (
+      '16-9': 16 / 9,
+      scope:  2.39,
+      square: 1
+    ),
+    slider: (
+      speed: .4s,
+      delay: 0s
+    ),
+    wrapper: (
+      gutter: 40px,
+      width:  1080px
+    )
+  ),
+
+  objects: (
+    form: (
+      line-height: '${global.line-height}'
+    )
+  ),
+
+  global: (
+    color:        #333,
+
+    font-family:  '${fonts.arial}',
+    font-size:    14,
+    line-height:  1.4,
+
+    head-max:     2,    // font-size coef of h6
+    head-min:     1.25, // font-size coef of h1
+    head-top:     2,    // margin coef (based on line-height) top of head elements
+    head-bottom:  1,    // margin coef (based on line-height) top of head elements
+
+    block-top:    1,                    // margin coef (based on line-height) top
+    block-bottom: '${global.block-top}' // margin coef (based on line-height) bottom
+  ),
+
+  medias: (
+    'M':  (max-width: 1080px),
+    'S':  (max-width: 768px),
+    'XS': (max-width: 320px)
+  ),
+
+  fonts: (
+    arial:    (Arial, "Arial Unicode MS", Helvetica, MyriadPro, Freesans, "Nimbus Sans L", "Liberation Sans", sans-serif),
+    courier:  ("Courier New", Courier, monospace),
+    georgia:  (Georgia, "New Century Schoolbook", "Nimbus Roman No9 L", serif),
+    lucida:   ("Lucida Sans", "Lucida Grande", '$fonts.arial'),
+    monaco:   (Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace),
+
+    monospace:  '${fonts.monaco}',
+    sans:       '${fonts.arial}',
+    serif:      '${fonts.georgia}'
+  )
+));

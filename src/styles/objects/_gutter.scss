@@ -1,0 +1,45 @@
+// Settings
+// ========================================================================== //
+$cfg:     'patterns.gutter';
+$values:   assert(data('#{$cfg}.sizes'), ('type': 'map'));
+
+// Styles
+// ========================================================================== //
+.o-gutter {
+  background: #F7F7F7;
+  border: 1px solid #DDD;
+  box-sizing: border-box;
+
+  @extend %p-gutter;
+
+  @include modifier() {
+    $media: modifier-media();
+  
+    @include vary-value($values) {
+      $size:  vary-modifier('-');
+      $value: vary-value();
+  
+      &.\--x#{$size}#{$media} {
+        margin-left: $value;
+        margin-right: $value;
+      }
+      &.\--left#{$size}#{$media} {
+        margin-left: $value;
+      }
+      &.\--right#{$size}#{$media} {
+        margin-right: $value;
+      }
+  
+      &.\--y#{$size}#{$media} {
+        margin-top: $value;
+        margin-bottom: $value;
+      }
+      &.\--top#{$size}#{$media} {
+        margin-top: $value;
+      }
+      &.\--bottom#{$size}#{$media} {
+        margin-bottom: $value;
+      }
+    }
+  }
+}

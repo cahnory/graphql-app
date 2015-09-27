@@ -1,0 +1,16 @@
+@function assert-map($value, $asserts) {
+  @if 'map' != type-of($asserts) {
+    @error 'argument `$asserts` of `str-apply($value, $asserts, $exclude)` must be a map';
+  }
+  @if 'map' != type-of($value) {
+    @return null;
+  }
+
+  @each $name, $assert in $asserts {
+    @if null == assert(map-get($value, $name), $assert) {
+      @return assert-error('map', $value, (asserts: $asserts));
+    }
+  }
+
+  @return $value;
+}

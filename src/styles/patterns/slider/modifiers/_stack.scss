@@ -1,0 +1,12 @@
+/// slider stack transition
+/// 
+/// @group patterns
+/// @access public
+@mixin p-slider---stack() {
+  position: relative;
+  left: 0;
+}
+@mixin p-slider---stack__current() {}
+@mixin p-slider---stack__next() {
+  left: 100%;
+}

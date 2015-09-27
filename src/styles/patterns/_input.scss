@@ -1,0 +1,19 @@
+@mixin p-input {
+  background: #FFF;
+  border: none;
+  box-sizing: border-box;
+  color: inherit;
+  display: inline-block;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  *font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@include once('p-input') {
+  %p-input {
+    @include p-input();
+  }
+}

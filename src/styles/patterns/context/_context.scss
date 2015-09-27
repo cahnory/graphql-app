@@ -1,0 +1,26 @@
+// Mixins
+// ========================================================================== //
+@import 'core/context';
+
+@import 'modifiers/block';
+@import 'modifiers/center';
+@import 'modifiers/inline';
+@import 'modifiers/left';
+@import 'modifiers/right';
+
+
+@include once('p-context') {
+  // Placeholders
+  // ========================================================================== //
+  %p-context { @include p-context(); }
+  
+  @include modifier() {
+    $media: modifier-media();
+  
+    %p-context--block#{$media}  { @include p-context---block(); }
+    %p-context--center#{$media} { @include p-context---center(); }
+    %p-context--inline#{$media} { @include p-context---inline(); }
+    %p-context--left#{$media}   { @include p-context---left(); }
+    %p-context--right#{$media}  { @include p-context---right(); }
+  }
+}

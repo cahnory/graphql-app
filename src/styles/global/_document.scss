@@ -1,0 +1,23 @@
+// Settings
+// ========================================================================== //
+$cfg: 'global';
+$font-size:       assert(data('#{$cfg}.font-size'),   (type: 'number', default: 14));
+$line-height:     assert(data('#{$cfg}.line-height'), (type: 'number', default: 1.35));
+$font-family:     assert(data('#{$cfg}.font-family'), (default: (Arial, sans-serif)));
+$color:           assert(data('#{$cfg}.color'),       (type: 'color', default: #333));
+
+html {
+  font-size: 100% / 16 * 10;
+  -ms-text-size-adjust: 100%;
+
+  color: if(#000 != $color, $color, null);
+}
+
+body {
+  font: $font-size * 0.1em unquote('/') $line-height $font-family;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: -moz-scrollbars-vertical;
+}

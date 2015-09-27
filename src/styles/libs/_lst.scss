@@ -1,0 +1,29 @@
+@function pop($list) {
+  $output: ();
+  $sep: list-separator($list);
+
+  @if length($list) > 0 {
+    @for $i from 1 to length($list) {
+      $output: append($output, nth($list, $i), $sep);
+    }
+  }
+
+  @return $output;
+}
+
+@function shift($list) {
+  $output: ();
+  $sep: list-separator($list);
+
+  @if length($list) > 1 {
+    @for $i from 2 through length($list) {
+      $output: append($output, nth($list, $i), $sep);
+    }
+  }
+
+  @return $output;
+}
+
+@function prepend($list, $value) {
+  @return join(append((), $value), $list, list-separator($list));
+}

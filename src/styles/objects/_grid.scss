@@ -1,0 +1,75 @@
+// Settings
+// ========================================================================== //
+$cfg:     'patterns.grid';
+$max:     data('#{$cfg}.max');
+$gutters: data('#{$cfg}.gutters');
+
+.o-grid {
+  @extend %p-grid;
+}
+.o-grid__cell {
+  background: #F7F7F7;
+  border: 1px solid #DDD;
+
+  @extend %p-grid__cell;
+}
+
+@include modifier() {
+  $media: modifier-media();
+  
+  .o-grid {
+    &.\--invert#{$media} {
+      @extend %p-grid--invert#{$media};
+    }
+  
+    &.\--revert#{$media} {
+      @extend %p-grid--revert#{$media};
+    }
+  }
+
+  .o-grid__cell {
+    &.\--span {
+      @for $i from 1 through $max {
+        &-#{$i}#{$media} {
+          @extend %p-grid__cell--span-#{$i}#{$media};
+        }
+      }
+    }
+
+    &.\--jump {
+      @for $i from 1 to $max {
+        &-#{$i}#{$media} {
+          @extend %p-grid__cell--jump-#{$i}#{$media};
+        }
+      }
+    }
+
+    &.\--gutter {
+      @include vary-value($gutters) {
+        // current selector property suffix
+        $gutter:  modifier-prop();
+    
+        &#{$gutter}#{$media},
+        &-x#{$gutter}#{$media} {
+          @extend %p-grid__cell--gutter-x#{$gutter}#{$media};
+        }
+        &-left#{$gutter}#{$media} {
+          @extend %p-grid__cell--gutter-left#{$gutter}#{$media};
+        }
+        &-right#{$gutter}#{$media} {
+          @extend %p-grid__cell--gutter-right#{$gutter}#{$media};
+        }
+    
+        &-y#{$gutter}#{$media} {
+          @extend %p-grid__cell--gutter-y#{$gutter}#{$media};
+        }
+        &-top#{$gutter}#{$media} {
+          @extend %p-grid__cell--gutter-top#{$gutter}#{$media};
+        }
+        &-bottom#{$gutter}#{$media} {
+          @extend %p-grid__cell--gutter-bottom#{$gutter}#{$media};
+        }
+      }
+    }
+  }
+}

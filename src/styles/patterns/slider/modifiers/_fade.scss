@@ -1,0 +1,11 @@
+/// slider fade transition
+/// 
+/// @group patterns
+/// @access public
+@mixin p-slider---fade() {}
+@mixin p-slider---fade__current() {
+  opacity: 1;
+}
+@mixin p-slider---fade__next() {
+  opacity: 0;
+}

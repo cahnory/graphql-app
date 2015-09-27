@@ -1,0 +1,15 @@
+/// Assert that $value type equal $type
+///
+/// @access public
+/// @group libs
+/// @param {*} $value
+/// @param {String | List} $types
+@function assert-type($value, $types) {
+  @each $type in $types {
+    @if $type == type-of($value) {
+      @return $value;
+    }
+  }
+
+  @return assert-error('type', $value, (types: $types));
+}

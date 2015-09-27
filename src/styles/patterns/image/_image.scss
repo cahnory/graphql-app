@@ -1,0 +1,28 @@
+// Mixins
+// ========================================================================== //
+@import 'core/image';
+@import 'core/img';
+@import 'core/wrap';
+
+@import 'modifiers/auto';
+@import 'modifiers/fluid';
+@import 'modifiers/fill';
+@import 'modifiers/full';
+
+
+@include once('p-image') {
+  // Placeholders
+  // ========================================================================== //
+  %p-image        { @include p-image(); }
+  %p-image__wrap  { @include p-image__wrap(); }
+  %p-image__img   { @include p-image__img(); }
+  
+  @include modifier() {
+    $media: modifier-media();
+    
+    %p-image--auto#{$media}   { @include p-image---auto(); }
+    %p-image--fluid#{$media}  { @include p-image---fluid(); }
+    %p-image--fill#{$media}   { @include p-image---fill(); }
+    %p-image--full#{$media}   { @include p-image---full(); }
+  }
+}

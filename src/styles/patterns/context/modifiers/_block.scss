@@ -1,0 +1,15 @@
+/// Context block
+/// 
+/// @group patterns
+/// @access public
+@mixin p-context---block() {
+  display: -ms-flexbox;
+  -ms-box-orient: horizontal;
+
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+
+  margin: 0;
+}

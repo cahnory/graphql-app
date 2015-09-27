@@ -1,0 +1,26 @@
+@function media-flatten($maps) {
+  $queries: ();
+
+  @if 'list' != type-of($maps) {
+    $maps: append((), $maps);
+  }
+
+  @each $map in $maps {
+    $query: $map;
+    @if 'map' == type-of($map) {
+      $query: '';
+      @each $prop, $value in $map {
+        $query: $query + if($query != '', ' and ', '') + '(#{$prop}:#{$value})';
+      }
+    }
+    $queries: append($queries, $query, comma);
+  }
+
+  @return #{$queries};
+}
+
+@mixin media($query) {
+  @media #{media-flatten($query)} {
+    @content;
+  }
+}

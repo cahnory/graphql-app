@@ -1,0 +1,7 @@
+/// slider
+/// 
+/// @group patterns
+/// @access public
+@mixin p-slider() {
+  @extend %p-inliner;
+}

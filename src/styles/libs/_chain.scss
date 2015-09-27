@@ -1,0 +1,7 @@
+@function chain($value, $functions...) {
+  @each $function in $functions {
+    $value: call(nth($function, 1), set-nth($function, 1, $value)...);
+  }
+  
+  @return $value;
+}

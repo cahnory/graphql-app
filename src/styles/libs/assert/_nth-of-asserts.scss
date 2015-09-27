@@ -1,0 +1,27 @@
+/// Assert that $n assertions in $asserts are correct
+///
+/// @access public
+/// @group libs
+/// @param {*}      $value a value to test
+/// @param {Number} $n minimum of correct assertion
+/// @param {List}   $asserts list of assertions
+@function assert-nth-of-asserts($value, $n, $asserts) {
+  $success: 0;
+
+  // disable error warn and get previous state
+  $warn: assert-warn(false, true);
+
+  @each $assert in $asserts {
+    @if null != assert($assert) {
+      $success: $success + 1;
+    }
+    @if $success >= $n {
+      @return $value;
+    }
+  }
+
+  // reset error warn
+  $warn: assert-warn(true);
+
+  @return assert-error('nth-of', $value, (n: $n, asserts: $asserts));
+}

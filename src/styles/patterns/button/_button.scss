@@ -1,0 +1,17 @@
+// Mixins
+// ========================================================================== //
+@import 'core/button';
+@import 'modifiers/block';
+
+
+@include once('p-button') {
+  // Placeholders
+  // ========================================================================== //
+  %p-button { @include p-button(); }
+  
+  @include modifier() {
+    $media: modifier-media();
+  
+    %p-button--block#{$media}  { @include p-button---block(); }
+  }
+}

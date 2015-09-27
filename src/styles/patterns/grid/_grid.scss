@@ -1,0 +1,111 @@
+// Dependencies
+// ========================================================================== //
+@import 'patterns/inliner/inliner';
+
+// Mixins
+// ========================================================================== //
+@import 'core/cell';
+@import 'core/grid';
+
+@import 'modifiers/gutter';
+@import 'modifiers/invert';
+@import 'modifiers/jump';
+@import 'modifiers/revert';
+@import 'modifiers/span';
+
+@include once('p-grid') {
+  // Settings
+  // ========================================================================== //
+  $cfg:     'patterns.grid';
+  @include  data-default('#{$cfg}', (
+    max: 24,
+    gutters: (
+      '': 16px
+    )
+  ));
+  
+  $max:     data('#{$cfg}.max');
+  $gutters: data('#{$cfg}.gutters');
+  
+  // Placeholders
+  // ========================================================================== //
+  %p-grid       { @include p-grid(); }
+  %p-grid__cell { @include p-grid__cell($max, ltr); }
+  
+  @include modifier() {
+    // current selector media suffix
+    // (could be blank if not in @media)
+    $media: modifier-media();
+  
+    // SPAN modifier
+    @include vary-inc(1, $max) {
+      // get current inc modifier
+      $span:  modifier-prop();
+      // number of columns to span
+      $size:  vary-value();
+  
+      // no span-1 outside @media
+      @if $media or $span != 1 {
+        %p-grid__cell--span#{$span}#{$media} {
+          @include p-grid__cell---span($size, 24);
+        }
+      }
+    }
+  
+    // JUMP modifier
+    @include vary-inc(0, $max - 1) {
+      // current selector increment suffix
+      $jump:  modifier-prop();
+      // number of columns to jump
+      $size:  vary-value();
+  
+      // no jump-0 outside @media
+      @if $media or $jump != 0 {
+        %p-grid__cell--jump#{$jump}#{$media} {
+          @include p-grid__cell---jump($size, 24);
+        }
+      }
+    }
+  
+    // GUTTER modifier
+    @include vary-value($gutters) {
+      // current selector property suffix
+      $gutter:  modifier-prop();
+      // size of the gutter
+      $size:    vary-value();
+  
+      %p-grid__cell--gutter-all#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($top: $size, $right: $size, $bottom: $size, $left: $size);
+      }
+  
+      %p-grid__cell--gutter-x#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($left: $size, $right: $size);
+      }
+      %p-grid__cell--gutter-left#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($left: $size);
+      }
+      %p-grid__cell--gutter-right#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($right: $size);
+      }
+  
+      %p-grid__cell--gutter-y#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($top: $size, $bottom: $size);
+      }
+      %p-grid__cell--gutter-top#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($top: $size);
+      }
+      %p-grid__cell--gutter-bottom#{$gutter}#{$media} {
+        @include p-grid__cell---gutter($bottom: $size);
+      }
+    }
+  
+    // INVERT modifiers
+    %p-grid--invert#{$media} {
+      @include p-grid---invert();
+    }
+    %p-grid--revert#{$media} {
+      @include p-grid---revert(ltr);
+    }
+  
+  }
+}

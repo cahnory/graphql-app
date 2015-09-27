@@ -1,0 +1,36 @@
+.o-nav__toggle {
+  display: none;
+
+  @include media(data('medias.S')) {
+    display: block;
+  }
+}
+
+.o-nav__list {
+  @extend %p-nav__list;
+}
+
+.o-nav__item {
+  border: 2px solid #F00;
+  padding: 4px 8px;
+
+  @extend
+    %p-nav__item,
+    %p-nav__item--cell,
+    %p-nav__item--block\@S
+    ;
+
+  @include modifier() {
+    $media: modifier-media();
+
+    &.\--cell#{$media} {
+      @extend %p-nav__item--cell#{$media};
+    }
+    &.\--block#{$media} {
+      @extend %p-nav__item--block#{$media};
+    }
+    &.\--inline#{$media} {
+      @extend %p-nav__item--inline#{$media};
+    }
+  }
+}

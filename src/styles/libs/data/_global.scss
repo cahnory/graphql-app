@@ -1,0 +1,51 @@
+@function data-global() {
+  // Create global data if none set
+  @if length($DATA__GLOBAL_STACK) == 0 {
+    @if data-global-set(map-merge((), ())) {}
+  }
+
+  @return nth($DATA__GLOBAL_STACK, 1);
+}
+
+// tell if a node is global data
+@function data-is_global($node) {
+  @return map-has-key($node, 'global');
+}
+
+@function data-global-validate($node) {
+  @if not data-is_node($node) {
+    $node: data-node($node);
+  }
+  $node: map-set($node, 'global', true);
+
+  @if 'map' != data-node-type($node) {
+    @error 'global data must be a map or map node.';
+  }
+
+  @return $node;
+}
+
+@function data-global-set($node) {
+  $node: data-global-validate($node);
+
+  $DATA__GLOBAL_STACK: prepend($DATA__GLOBAL_STACK, $node)!global;
+
+  @return $node;
+}
+
+@function data-global-unset() {
+  @if length($DATA__GLOBAL_STACK) > 0 {
+    $DATA__GLOBAL_STACK: shift($DATA__GLOBAL_STACK)!global;
+    @return true;
+  }
+
+  @return false;
+}
+@function data-global-replace($node) {
+  $node: data-global-validate($node);
+
+  $DATA__GLOBAL_STACK: set-nth($DATA__GLOBAL_STACK, 1, $node)!global;
+  @return true;
+}
+
+$DATA__GLOBAL_STACK: ()!default;

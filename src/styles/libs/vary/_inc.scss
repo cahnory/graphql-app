@@ -1,0 +1,13 @@
+@mixin vary-inc($from, $through, $inc: 1) {
+  @if ($through - $from) / $inc < 0 {
+    @warn 'vary-inc unreachable error';
+  }
+  @else {
+    @while $from <= $through {
+      @include vary-open($from, $from) {
+        @content;
+      }
+      $from: $from + $inc;
+    }
+  }
+}

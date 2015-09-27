@@ -1,0 +1,34 @@
+/// Inline context.
+///
+/// @access public
+@mixin p-context() {
+	display: -ms-flexbox;
+	-ms-box-orient: horizontal;
+
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: flex;
+
+	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;
+
+  // IE7
+  zoom: 1;
+
+  // IE8, IE9
+  filter: progid:DXImageTransform.Microsoft.Alpha();
+
+  // don't worry for specificity
+  // a single class is enough
+  //
+  // you can change the display value as long
+  // as width remains 100%. Oserwise the display
+  // could differ in IE < 10
+  & > * {
+    display: block;
+    width: 100%;
+  }
+}

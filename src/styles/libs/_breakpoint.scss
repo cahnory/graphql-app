@@ -1,0 +1,40 @@
+@mixin breakpoint($name) {
+
+  @if not breakpoint-defined($name) {
+    @if type-of($name) != number {
+      @error 'undefined `#{$name}`';
+    }
+
+    // set the unnamed width
+    @include breakpoint-set($name);
+  }
+
+  $name:  breakpoint-name($name);
+  $width: breakpoint-width($name);
+}
+
+@mixin breakpoint-set($width, $name: $width) {
+  $name: breakpoint-name($name);
+
+  @if not breakpoint-defined($name) {
+    $BREAKPOINT_WIDTHS: map-merge($BREAKPOINT_WIDTHS, ($name: $width));
+  }
+  @else if breakpoint-width($name) != $width {
+    @warn 'Breakpoint collision for `#{$name}`: #{breakpoint-width($name)}, {$width}';
+  }
+}
+
+@function breakpoint-name($name) {
+  @return '#{$name}';
+}
+
+@function breakpoint-width($name) {
+  @return map-get($BREAKPOINT_WIDTHS, $name);
+}
+
+@function breakpoint-defined($name) {
+  @return map-has-key($BREAKPOINT_WIDTHS, breakpoint-name($name));
+}
+
+$BREAKPOINT_WIDTHS: ();
+$BREAKPOINT_CALLED: ();

@@ -1,0 +1,13 @@
+@mixin vary-value($values, $default: null) {
+  @if $default {
+    @include vary-open(null, $default) {
+      @content;
+    }
+  }
+
+  @each $name, $value in $values {
+    @include vary-open($name, $value) {
+      @content;
+    }
+  }
+}

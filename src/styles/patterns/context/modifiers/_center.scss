@@ -1,0 +1,8 @@
+/// Context center
+/// 
+/// @group patterns
+/// @access public
+@mixin p-context---center() {
+  display: table;
+  margin: auto;
+}

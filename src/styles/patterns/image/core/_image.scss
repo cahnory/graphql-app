@@ -1,0 +1,12 @@
+/// Image pattern
+///
+/// @group patterns
+/// @access public
+@mixin p-image {
+  display: block; // IE 7
+  display: table;
+  max-width: none;
+  min-width: 0;
+  position: relative;
+  left: 50%;
+}

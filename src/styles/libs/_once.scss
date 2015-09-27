@@ -1,0 +1,23 @@
+// Include @content if action isn't done yet
+@mixin once($action) {
+  // search action in done actions
+  $done: index($DO_ONCE__ACTIONS, $action);
+
+  @if not $done {
+    // set action as done
+    $DO_ONCE__ACTIONS: append($DO_ONCE__ACTIONS, $action)!global;
+    @content;
+  }
+}
+
+// Include @content if action is done yet
+@mixin once-done($action) {
+  // search action in done actions
+  $done: index($DO_ONCE__ACTIONS, $action);
+
+  @if $done {
+    @content;
+  }
+}
+
+$DO_ONCE__ACTIONS: ()!default;

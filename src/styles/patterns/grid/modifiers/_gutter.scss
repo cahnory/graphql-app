@@ -1,0 +1,10 @@
+/// grid gutter
+/// 
+/// @group patterns
+/// @access public
+@mixin p-grid__cell---gutter($top:null, $right: null, $bottom: null, $left: null) {
+  padding-bottom: $bottom;
+  padding-left:   $left;
+  padding-right:  $right;
+  padding-top:    $top;
+}

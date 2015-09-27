@@ -1,0 +1,32 @@
+@import 'default';
+@import 'each';
+@import 'gt';
+@import 'gte';
+@import 'lt';
+@import 'lte';
+@import 'map';
+@import 'not';
+@import 'nth-of';
+@import 'one-of';
+@import 'type';
+
+@import 'error';
+
+// ASSERT ------------------------------------------------------
+
+/// Call multiple asserts at once
+/// @param {*} $value
+/// @param {List} $asserts
+@function assert($value, $asserts, $default: null) {
+  $value: if(null == $value, $default, $value);
+
+  @each $name, $params in $asserts {
+    // returns null if assert fails
+    $params: $value, $params;
+    $value: call('assert-#{$name}', $params...);
+  }
+
+  $value: if(null == $value, $default, $value);
+
+  @return $value;
+}

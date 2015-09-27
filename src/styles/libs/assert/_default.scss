@@ -1,0 +1,9 @@
+/// Return $default if $value is null
+///
+/// @access public
+/// @group libs
+/// @param {*} $value
+/// @param {*} $default default value
+@function assert-default($value, $default) {
+  @return if(null != $value, $value, $default);
+}

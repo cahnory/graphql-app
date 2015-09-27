@@ -1,0 +1,16 @@
+/// icon
+/// 
+/// @group patterns
+/// @access public
+@mixin p-icon($font) {
+  display: inline-block;
+  font: normal normal normal 1em/1 $font;
+  min-width: 1em;
+  padding: 0;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  transform: translate(0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,12 @@
+@function assert-warn($warn: null, $prev: false) {
+  $output: $warn;
+
+  @if $warn != null {
+    $ASSERT__WARN: not not $warn!global;
+    $output: if($prev, $output, $warn);
+  }
+
+  @return $output;
+}
+
+$ASSERT__WARN: true!default;

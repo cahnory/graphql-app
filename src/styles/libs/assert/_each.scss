@@ -1,0 +1,30 @@
+/// Call assertions in $asserts on each $value children
+///
+/// @access public
+/// @group libs
+/// @param {*}    $value a value to test
+/// @param {List} $asserts list of assertions
+@function assert-each($value, $asserts, $exclude: true) {
+  $output: null;
+
+  @if 'map' == type-of($value) {
+    $output: map-merge((),());
+    @each $key, $child in $value {
+      $child: assert($child, $asserts);
+      @if $child != null or not $exclude {
+        $output: map-merge($output, ($key: $child));
+      }
+    }
+  }
+  @else {
+    $output: ();
+    @each $child in $value {
+      $child: assert($child, $asserts);
+      @if $child != null or not $exclude {
+        $output: append($output, $child);
+      }
+    }
+  }
+
+  @return $output;
+}

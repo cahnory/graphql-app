@@ -1,0 +1,121 @@
+@function data-node($input) {
+  @if data-is_node($input) {
+    @return $input;
+  }
+
+  $type: type-of($input);
+  $data: $input;
+
+  @if 'map' == $type {
+    $data: ();
+    @each $key, $child in $input {
+      $data: map-set($data, $key, data-node($child));
+    }
+  }
+  @else if 'list' == $type {
+    $sep:   list-separator($input);
+    $data: join((), (), $sep);
+    @each $child in $input {
+      $data: append($data, data-node($child));
+    }
+  }
+  @else if 'string' == $type and str-is-pattern($input) {
+    $type: 'pattern';
+  }
+
+  @return (
+    type: $type,
+    data: $data,
+    #{$DATA__NODE__KEY}: $DATA__NODE__VAL
+  );
+}
+@function data-node-empty() {
+  @return (
+    type: 'undefined',
+    data: null,
+    #{$DATA__NODE__KEY}: $DATA__NODE__VAL
+  );
+}
+
+@function data-is_node($node) {
+  @return
+    'map' == type-of($node)
+    and map-has-key($node, $DATA__NODE__KEY)
+    and map-get($node, $DATA__NODE__KEY) == $DATA__NODE__VAL;
+}
+@function data-node-type($node) {
+  @return map-get($node, 'type');
+}
+@function data-node-data($node) {
+  @return map-get($node, 'data');
+}
+
+@function data-node-value($node, $collection: data-node-empty()) {
+  $type:  data-node-type($node);
+  $data:  data-node-data($node);
+  $value: $data;
+
+  @if 'pattern' == $type and $collection {
+    @if $collection {
+      $value: str-apply($value, ('data-node-apply', $collection));
+    }
+    @else {
+      $value: null;
+    }
+  }
+  @else if 'map' == $type {
+    $value: ();
+    @each $key, $child in $data {
+      $value: map-set($value, '#{$key}', data-node-value($child, $collection));
+    }
+  }
+  @else if 'list' == $type {
+    @if length($data) > 0 {
+      @for $key from 1 through length($data) {
+        $value: set-nth($value, $key, data-node-value(nth($data, $key), $collection));
+      }
+    }
+  }
+
+  @return $value;
+}
+@function data-node-apply($exp, $before, $after, $node) {
+  $result:  data-get($exp, $node);
+  @return if(str-length($before + $after) > 0, #{$before}#{$result}#{$after}, $result);
+}
+
+@function data-node-set($node, $name, $child) {
+  @if 'map' != data-node-type($node) {
+    $node: data-node(map-merge((),()));
+  }
+  @else if 'map' == data-node-type($child) {
+    $child: data-node-merge(data-node-get($node, $name), $child);
+  }
+
+  @return map-set($node, 'data', map-set(map-get($node, 'data'), $name, data-node($child)));
+}
+
+@function data-node-get($node, $name) {
+  @if 'map' != data-node-type($node) {
+    @return data-node-empty();
+  }
+
+  @return map-get(map-get($node, 'data'), $name) or data-node-empty();
+}
+
+@function data-node-merge($node1, $node2) {
+  @if 'map' != data-node-type($node1) {
+    $node1: data-node(map-merge((),()));
+  }
+
+  @if 'map' == data-node-type($node2) {
+    @each $name, $child in map-get($node2, data) {
+      $node1: data-node-set($node1, $name, $child);
+    }
+  }
+
+  @return $node1;
+}
+
+$DATA__NODE__KEY: '3955d1fde323898cc48bee436339f3ed';
+$DATA__NODE__VAL: '1bd1eb7f4427a32a1c08e3b3edbac28f';
