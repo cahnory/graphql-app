@@ -41,7 +41,8 @@
       "quotes": [2, "single"],
       "semi": [2, "always"],
       "use-isnan": 2,
-      "valid-typeof": 2
+      "valid-typeof": 2,
+      "vars-on-top": 2
     },
     "ecmaFeatures": {
       "blockBindings": true,

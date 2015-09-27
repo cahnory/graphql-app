@@ -14,11 +14,10 @@ export default function () {
   });
 }
 
-export function middleware(opts) {
-  opts = opts || {root: opts};
-
-  var root = path.resolve(opts.root || '.');
-  var prefix = opts.prefix || '/';
+export function middleware(options) {
+  var config = getConfig(options);
+  var root = path.resolve(config.root || '.');
+  var prefix = config.prefix || '/';
   var buffers = {};
 
   return function * (next) {
@@ -32,7 +31,7 @@ export function middleware(opts) {
     } else {
       // first call
       if (!buffers.hasOwnProperty(src)) {
-        res = browserify(src, opts)
+        res = browserify(src, config)
         .bundle((err, buffer) => {
           buffers[src] = buffer;
         });
@@ -47,4 +46,17 @@ export function middleware(opts) {
       this.body = res;
     }
   };
+}
+
+function getConfig(options) {
+  // convert src to options object
+  if ('string' === typeof options) {
+    options = {
+      root: options
+    };
+  } else if (!options || 'object' !== typeof options) {
+    options = {};
+  }
+
+  return options;
 }
