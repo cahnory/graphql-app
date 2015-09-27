@@ -11,60 +11,42 @@ export default function (options) {
   options.handleNotFound = !!options.handleNotFound;
   
   return function (data, next) {
+    let location = createLocation(data.location);
+    let history = isBrowser ? createHistory() : createMemoryHistory();
     let routes = [{
       path: options.base,
       component: data.Component,
       childRoutes: options.routes
     }];
 
-    data.Component = class Context extends React.Component {
-      render() {
-        return <Router routes={routes} {...this.props}/>;
-      }
-    };
-
-    transform(data, routes, next);
-  }
-}
-
-function transform(data, routes, next) {
-  let history = isBrowser ? createHistory() : createMemoryHistory();
-  let location = createLocation(data.location);
-
-  match({routes: routes, history: history, location: location},
-    function (error, redirect, renderProps) {
-      if (redirect) {
-        data.status = 301;
-        data.redirect = redirect;
-        next(301);
-      } else if (error) {
-        data.status = 500;
-        data.error = error;
-        next(error);
-      } else {
-        if (renderProps === null) {
+    match(
+      {routes: routes, history: history, location: location},
+      function (error, redirect, props) {
+        if (redirect) {
+          data.status = 301;
+          data.redirect = redirect;
+          error = 301
+        } else if (error) {
+          data.status = 500;
+          data.error = error;
+        } else if (props === null) {
           data.status = 404;
-          renderProps = {
-            routes: routes,
-            history: history,
-            location: location,
-            params: {},
-            components: []
-          };
+          error = options.handleNotFound ? error : 404;
         } else {
           data.status = 200;
         }
 
-        // merge props
-        for (let i in renderProps) {
-          if (renderProps.hasOwnProperty(i)) {
-            data.props[i] = renderProps[i];
+        data.Component = class IsoRouterContext extends React.Component {
+          render() {
+            return isBrowser
+              ? <Router location={location} history={history} routes={routes}/>
+              : <RoutingContext {...this.props}></RoutingContext>;
           }
         }
-        // switch Component
-        data.Component = RoutingContext;
-        next();
+        data.props = props;
+
+        next(error);
       }
-    }
-  );
+    );
+  }
 }

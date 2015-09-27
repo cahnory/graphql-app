@@ -1,10 +1,9 @@
-export const globalKey = 'MaGlobalKey';
+export const globalKey = 'if_you_set_this_var_its_really_because_you_wanted_me_to_suffer__love__cahnory';
 export const isBrowser = !!process.browser;
 
 export function asyncLoop(data, callbacks, onError, index) {
   index = index || 0;
 
-  console.log(JSON.parse(JSON.stringify(data)));
   if (index < callbacks.length) {
     callbacks[index](data, function (error) {
       if (error) {
@@ -16,4 +15,4 @@ export function asyncLoop(data, callbacks, onError, index) {
       }
     });
   }
-}
+};
