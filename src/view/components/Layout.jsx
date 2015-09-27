@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Link } from 'react-router';
+import Link from './Link';
 
 export default class AppLayout extends React.Component {
   componentWillMount() {
