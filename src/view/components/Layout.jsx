@@ -1,6 +1,5 @@
 import React from 'react';
-import { Isomorph } from '../utils/isomorph';
-import { Link } from 'react-router';
+import { Router, Link } from 'react-router';
 
 export default class AppLayout extends React.Component {
   componentWillMount() {
@@ -20,16 +19,14 @@ export default class AppLayout extends React.Component {
           <title>React app</title>
         </head>
         <body>
-          Hello World!<br />
-          Your are currently viewing <strong>{ this.state.renderSide }</strong> side render.
-          <div>
-            <Link to="/">Home</Link> |
-            <Link to="/foo">foo</Link> |
-            <Link to="/bar">bar</Link> |
-            <Link to="/foo/bar">foo/bar</Link>
-          </div>
+          Hello World { this.state.renderSide }!
+          
+          <ul>
+            <li><Link to="/">Dashboard</Link></li>
+            <li><Link to="/body">Body</Link></li>
+            <li><Link to="/foo">Foo</Link></li>
+          </ul>
           { this.props.children }
-          <Isomorph />
         </body>
       </html>
     );

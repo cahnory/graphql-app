@@ -1,9 +1,28 @@
-import App from '../components/App';
-import isomorph from '../utils/isomorph';
+import polyfill from '../utils/polyfill';
+import Isomorph from '../utils/Isomorph';
+import Router   from '../utils/Isomorph/transform/react-router';
 
-export default isomorph(App, '/assets/js/main.js');
+import Layout   from '../components/Layout';
+import Body     from '../components/Body';
+import Foo     from '../components/Foo';
 
-
+export default new Isomorph(Layout, '/assets/js/main.js', {
+  transform: [
+    Router({
+      routes: [
+        {
+          path: 'body',
+          component: Body
+        },
+        {
+          path: 'foo',
+          component: Foo
+        }
+      ],
+      handleNotFound: true
+    })
+  ]
+});
 
 //import AppHomeRoute from './routes/AppHomeRoute';
 

@@ -1,4 +1,4 @@
-import defaultApp from '../view/documents/main';
+import DefaultDocument from '../view/documents/main';
 
 export default function (opts) {
   opts = opts || {
@@ -12,16 +12,24 @@ export default function (opts) {
   return function * (next) {
     // set context object
     this.renderer = {
-      app: defaultApp,
+      app: DefaultDocument,
       state: JSON.parse(JSON.stringify(opts.state))
     };
 
-    // default location (useful for routers)
-    this.renderer.state.location = this.renderer.state.location || this.originalUrl; 
-
     yield next;
 
-    this.type = 'text/html; charset=utf-8';
-    this.body = this.renderer.app(this.renderer.state);
+    
+    this.renderer.app.render(
+      this.renderer.state,
+      this.originalUrl,
+      (error, body, data) => {
+        if (error) {
+          console.log(error, body, data);
+        }
+
+        this.type = 'text/html; charset=utf-8';
+        this.body = body;
+        this.status = data.status || this.status;
+      });
   }
 }
