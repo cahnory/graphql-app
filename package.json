@@ -6,6 +6,8 @@
   "scripts": {
     "watch": "nodemon --watch src --ext js,jsx --exec npm run start",
     "start": "babel-node --harmony src/index.js",
+    "build": "babel --optional runtime src --out-dir build",
+    "prod": "set NODE_ENV=production && node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -27,7 +29,9 @@
     "waterline": "^0.10.26"
   },
   "devDependencies": {
+    "babel-runtime": "^5.8.25",
     "babelify": "^6.3.0",
+    "forever": "^0.15.1",
     "nodemon": "^1.7.0",
     "reactify": "^1.1.1"
   }
