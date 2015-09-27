@@ -1,7 +1,6 @@
 import Middleware from 'node-sass-middleware';
 
 const PROD_ENV = process.env.NODE_ENV === 'production';
-console.log(PROD_ENV);
 
 export default function (options = {}) {
   // convert src to options object
