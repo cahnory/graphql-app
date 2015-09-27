@@ -26,7 +26,6 @@ export const root = {
 };
 
 export const routing = {
-  indexRoute: root,
   routes: [root]
 };
 
