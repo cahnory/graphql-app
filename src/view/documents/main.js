@@ -4,7 +4,8 @@ import Router   from '../utils/Isomorph/transform/react-router';
 
 import Layout   from '../components/Layout';
 import Body     from '../components/Body';
-import Foo     from '../components/Foo';
+import Foo      from '../components/Foo';
+import NotFound from '../components/NotFound';
 
 export default new Isomorph(Layout, '/assets/js/main.js', {
   transform: [
@@ -17,6 +18,10 @@ export default new Isomorph(Layout, '/assets/js/main.js', {
         {
           path: 'foo',
           component: Foo
+        },
+        {
+          path: '*',
+          component: NotFound
         }
       ],
       handleNotFound: true
