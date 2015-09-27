@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
 import { globalKey, isBrowser, asyncLoop } from './utils';
 import isomorphTransform from './transform/isomorph';
 
@@ -42,9 +44,9 @@ export default class Isomorph {
 }
 
 function renderInBrowser(Component, props) {
-  return React.render(<Component { ...props } />, document);
+  return ReactDOM.render(<Component { ...props } />, document);
 }
 
 function renderInNode(Component, props) {
-  return '<!DOCTYPE html>' + React.renderToString(<Component { ...props } />);
+  return '<!DOCTYPE html>' + ReactDOMServer.renderToString(<Component { ...props } />);
 }
