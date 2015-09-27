@@ -2,15 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import browserify from 'browserify';
 import babelify from 'babelify';
+import uglifyify from 'uglifyify';
+
+const PROD_ENV = process.env.NODE_ENV === 'production';
 
 export default function () {
   return middleware({
     root: './src/view/documents',
     prefix: '/assets/js',
-    debug: process.env.NODE_ENV !== 'production',
-    production: process.env.NODE_ENV === 'production',
     transform: [babelify],
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json'],
+    minify: true
   });
 }
 
@@ -58,5 +60,21 @@ function getConfig(options) {
     options = {};
   }
 
+  options.production = defaultOption(options.production, !PROD_ENV);
+  options.debug = defaultOption(options.debug, !options.production);
+  options.minify = defaultOption(options.minify, options.production);
+  options.transform = arrayOption(options.transform);
+
+  if (options.minify) {
+    options.transform.push(uglifyify)
+  }
+
   return options;
+}
+
+function defaultOption(option, alt) {
+  return option !== undefined ? option : alt;
+}
+function arrayOption(option, alt = []) {
+  return [].concat(option || alt);
 }

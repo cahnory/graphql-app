@@ -15,7 +15,10 @@
   "license": "ISC",
   "eslintConfig": {
     "rules": {
-      "comma-dangle": [2, "never"],
+      "comma-dangle": [
+        2,
+        "never"
+      ],
       "no-cond-assign": 2,
       "no-console": 0,
       "no-constant-condition": 2,
@@ -38,8 +41,14 @@
       "no-obj-calls": 2,
       "no-sparse-arrays": 2,
       "no-unreachable": 2,
-      "quotes": [2, "single"],
-      "semi": [2, "always"],
+      "quotes": [
+        2,
+        "single"
+      ],
+      "semi": [
+        2,
+        "always"
+      ],
       "use-isnan": 2,
       "valid-typeof": 2,
       "vars-on-top": 2
@@ -58,6 +67,7 @@
   },
   "dependencies": {
     "babel": "^5.8.23",
+    "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "console-polyfill": "^0.2.2",
     "es5-shim": "^4.1.13",
@@ -70,11 +80,11 @@
     "node-sass-middleware": "^0.9.6",
     "react": "^0.13.3",
     "react-router": "^1.0.0-rc1",
+    "uglifyify": "^3.0.1",
     "waterline": "^0.10.26"
   },
   "devDependencies": {
     "babel-runtime": "^5.8.25",
-    "babelify": "^6.3.0",
     "eslint": "^1.5.1",
     "forever": "^0.15.1",
     "nodemon": "^1.7.0",
