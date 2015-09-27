@@ -1,6 +1,6 @@
 import {
   GraphQLSchema,
-  GraphQLObjectType,
+  GraphQLObjectType
 } from 'graphql/type';
 
 import User from './User';

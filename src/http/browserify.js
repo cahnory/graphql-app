@@ -46,6 +46,5 @@ export function middleware(opts) {
       this.type = 'text/javascript';
       this.body = res;
     }
-  }
-  return browserify()
-};
+  };
+}

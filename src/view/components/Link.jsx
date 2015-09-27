@@ -7,4 +7,4 @@ export default class Link extends React.Component {
     return <RouterLink activeClassName="--current" {...this.props}>{ this.props.children }</RouterLink>;
   }
 
-};
+}

@@ -39,12 +39,12 @@ export default class Isomorph {
     );
   }
 
-};
+}
 
 function renderInBrowser(Component, props) {
   return React.render(<Component { ...props } />, document);
-};
+}
 
 function renderInNode(Component, props) {
   return '<!DOCTYPE html>' + React.renderToString(<Component { ...props } />);
-};
+}

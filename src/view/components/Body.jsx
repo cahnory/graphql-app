@@ -10,13 +10,11 @@ export default class Body extends React.Component {
   }
 
   render() {
-    return (
+    return <div>
+      <h1>React app</h1>
       <div>
-        <h1>React app</h1>
-        <div>
-          { this.props.children }
-        </div>
+        { this.props.children }
       </div>
-    );
+    </div>;
   }
 }

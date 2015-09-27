@@ -22,12 +22,12 @@ export default function isomorphTransform() {
 
     next();
   };
-};
+}
 
 isomorphTransform.getProps = function() {
   return global[globalKey].props;
-}
+};
 
 isomorphTransform.getSrc = function() {
   return global[globalKey].src;
-}
+};

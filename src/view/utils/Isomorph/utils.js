@@ -11,8 +11,8 @@ export function asyncLoop(data, callbacks, onError, index) {
           onError(error, data);
         }
       } else {
-        asyncLoop(data, callbacks, onError, index + 1)
+        asyncLoop(data, callbacks, onError, index + 1);
       }
     });
   }
-};
+}

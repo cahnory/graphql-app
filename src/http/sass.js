@@ -26,4 +26,4 @@ export default function (options = {}) {
       yield middleware.bind(middleware, this.req, this.res);
       yield next;
   };
-};
+}

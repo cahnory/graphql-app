@@ -26,7 +26,7 @@ export default function (options) {
         if (redirect) {
           data.status = 301;
           data.redirect = redirect;
-          error = 301
+          error = 301;
         } else if (error) {
           data.status = 500;
           data.error = error;
@@ -43,11 +43,11 @@ export default function (options) {
               ? <Router location={location} history={history} routes={routes}/>
               : <RoutingContext {...this.props}></RoutingContext>;
           }
-        }
+        };
         data.props = props;
 
         next(error);
       }
     );
-  }
+  };
 }

@@ -1,7 +1,7 @@
 import path from 'path';
 
 export default function (opts = {}) {
-  opts.src = opts.src || 'index.js'
+  opts.src = opts.src || 'index.js';
   opts.prefix = opts.prefix || '/';
   opts.cwd = opts.cwd || process.cwd();
   opts.state = opts.state || {
@@ -32,5 +32,5 @@ export default function (opts = {}) {
         this.body = body;
         this.status = data.status || this.status;
       });
-  }
+  };
 }
