@@ -4,7 +4,7 @@ import serve  from 'koa-static';
 
 import browserify from './http/browserify';
 import graphql    from './http/graphql';
-import renderer   from './http/renderer';
+import isomorph   from './http/isomorph';
 import sass       from './http/sass';
 
 const app = koa();
@@ -21,7 +21,11 @@ app
 }))
 .use(router().get('/graphql', graphql()).routes())
 .use(router().get('/assets/js/:filename', browserify()).routes())
-.use(renderer());
+.use(isomorph({
+  src: 'main.js',
+  cwd: __dirname + '/view/documents',
+  prefix: '/assets/js'
+}));
 
 try {
   app.listen(1337);

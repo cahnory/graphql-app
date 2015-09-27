@@ -16,7 +16,8 @@ export default function (options) {
     let routes = [{
       path: options.base,
       component: data.Component,
-      childRoutes: options.routes
+      childRoutes: options.routes,
+      indexRoute: options.indexRoute
     }];
 
     match(

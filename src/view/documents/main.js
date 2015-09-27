@@ -5,25 +5,36 @@ import Router   from '../utils/Isomorph/transform/react-router';
 import Layout   from '../components/Layout';
 import Body     from '../components/Body';
 import Foo      from '../components/Foo';
+import Bar      from '../components/Bar';
 import NotFound from '../components/NotFound';
 
-export default new Isomorph(Layout, '/assets/js/main.js', {
+export default new Isomorph(Layout, {
   transform: [
     Router({
-      routes: [
-        {
-          path: 'body',
-          component: Body
-        },
-        {
-          path: 'foo',
+      indexRoute: {
+        component: Body
+      },
+      routes: [{
+        path: '/',
+        component: Body,
+        indexRoute: {
           component: Foo
         },
-        {
-          path: '*',
-          component: NotFound
-        }
-      ],
+        childRoutes: [
+          {
+            path: 'foo',
+            component: Foo
+          },
+          {
+            path: 'bar',
+            component: Bar
+          },
+          {
+            path: '*',
+            component: NotFound
+          }
+        ]
+      }],
       handleNotFound: true
     })
   ]

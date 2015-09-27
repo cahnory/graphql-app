@@ -4,24 +4,27 @@ import isomorphTransform from './transform/isomorph';
 
 export default class Isomorph {
 
-  constructor(Component, src, options) {
+  constructor(Component, options) {
     options = options || {};
-    this.src = src;
     this.Component = Component;
     this.transform = [isomorphTransform()].concat(options.transform || []);
 
     if (isBrowser) {
-      this.render(isomorphTransform.getProps(), location.pathname + location.search + location.hash);
+      this.render(
+        isomorphTransform.getSrc(),
+        location.pathname + location.search + location.hash,
+        isomorphTransform.getProps()
+      );
     }
   }
 
-  render(props, location, callback, onError) {
+  render(src, location, props, callback, onError) {
     asyncLoop(
       {
         Component: this.Component,
         props: props,
         location: '' + location,
-        src: this.src
+        src: src
       },
       this.transform.concat((data, next) => {
         let body = isBrowser

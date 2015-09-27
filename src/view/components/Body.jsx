@@ -11,7 +11,12 @@ export default class Body extends React.Component {
 
   render() {
     return (
-      <div>body</div>
+      <div>
+        <h1>React app</h1>
+        <div>
+          { this.props.children }
+        </div>
+      </div>
     );
   }
 }

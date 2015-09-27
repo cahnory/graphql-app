@@ -12,7 +12,7 @@ export default function isomorphTransform() {
       render () {
         return <Component{ ...props }>
           { this.props.children }
-          <script dangerouslySetInnerHTML={{ __html: 'var ' + globalKey + '=' + JSON.stringify(props) }}></script>
+          <script dangerouslySetInnerHTML={{ __html: 'var ' + globalKey + '=' + JSON.stringify({props: props, src: src}) }}></script>
           <script src={ src }></script>
         </Component>;
       }
@@ -25,5 +25,9 @@ export default function isomorphTransform() {
 };
 
 isomorphTransform.getProps = function() {
-  return global[globalKey];
+  return global[globalKey].props;
+}
+
+isomorphTransform.getSrc = function() {
+  return global[globalKey].src;
 }
