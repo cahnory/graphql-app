@@ -66,7 +66,7 @@ function getConfig(options) {
   options.transform = arrayOption(options.transform);
 
   if (options.minify) {
-    options.transform.push(uglifyify)
+    options.transform.push(uglifyify);
   }
 
   return options;
