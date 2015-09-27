@@ -1,4 +1,6 @@
 import koa    from 'koa';
+import etag   from 'koa-etag';
+import gzip   from 'koa-gzip';
 import router from 'koa-router';
 import serve  from 'koa-static';
 
@@ -13,6 +15,8 @@ const styles  = '/assets/css';
 
 
 app
+.use(gzip())
+.use(etag())
 .use(serve(httpdoc))
 .use(sass({
   src:    __dirname + '/styles/',
