@@ -4,34 +4,30 @@ import Foo      from '../../components/Foo';
 import Bar      from '../../components/Bar';
 
 export const foo = {
-  
+  path: 'foo',
+  component: Foo
+};
+
+export const bar = {
+  path: 'bar',
+  component: Bar
+};
+
+export const notFound = {
+  path: '*',
+  component: NotFound
+};
+
+export const root = {
+  path: '/',
+  component: Layout,
+  indexRoute: foo,
+  childRoutes: [foo, bar, notFound]
 };
 
 export const routing = {
-  indexRoute: {
-    component: Layout
-  },
-  routes: [{
-    path: '/',
-    component: Layout,
-    indexRoute: {
-      component: Foo
-    },
-    childRoutes: [
-      {
-        path: 'foo',
-        component: Foo
-      },
-      {
-        path: 'bar',
-        component: Bar
-      },
-      {
-        path: '*',
-        component: NotFound
-      }
-    ]
-  }]
+  indexRoute: root,
+  routes: [root]
 };
 
 export default routing;
