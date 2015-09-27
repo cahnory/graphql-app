@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from './Link';
 
-export default class AppLayout extends React.Component {
+export default class Layout extends React.Component {
   componentWillMount() {
     this.setState({ renderSide: 'server' });
   }
@@ -11,25 +11,18 @@ export default class AppLayout extends React.Component {
   }
 
   render() {
-    return <html>
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>React app</title>
-        <link href="/assets/css/main.css" rel="stylesheet" />
-      </head>
-      <body>
-        Hello World { this.state.renderSide }!
-        
-        <ul>
-          <li><Link to="/">Dashboard</Link></li>
-          <li><Link to="/body">Body</Link></li>
-          <li><Link to="/foo">Foo</Link></li>
-        </ul>
+    return <div>
+      <h1>React app</h1>
+      Hello World { this.state.renderSide }!
+      
+      <ul>
+        <li><Link to="/">Dashboard</Link></li>
+        <li><Link to="/body">Body</Link></li>
+        <li><Link to="/foo">Foo</Link></li>
+      </ul>
+      <div>
         { this.props.children }
-      </body>
-    </html>;
+      </div>
+    </div>;
   }
 }
-
-export const doctype = '<!DOCTYPE html>';

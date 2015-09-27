@@ -22,7 +22,7 @@ app
 .use(router().get('/graphql', graphql()).routes())
 .use(router().get('/assets/js/:filename', browserify()).routes())
 .use(isomorph({
-  src: 'main.js',
+  src: 'main',
   cwd: __dirname + '/view/documents',
   prefix: '/assets/js'
 }));
