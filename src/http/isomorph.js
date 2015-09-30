@@ -2,11 +2,8 @@ import path from 'path';
 
 export default function (opts = {}) {
   opts.src = opts.src || 'index.js';
-  opts.prefix = opts.prefix || '/';
-  opts.cwd = opts.cwd || process.cwd();
-  opts.state = opts.state || {
-    foo: 'bar'
-  };
+  opts.uri = opts.uri || opts.src;
+  opts.layout = opts.layout || 'index.html';
 
   return function * (next) {
     // set context object

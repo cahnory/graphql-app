@@ -4,10 +4,10 @@ import gzip   from 'koa-gzip';
 import router from 'koa-router';
 import serve  from 'koa-static';
 
-import browserify from './http/browserify';
 import graphql    from './http/graphql';
-import isomorph   from './http/isomorph';
 import sass       from './http/sass';
+import view       from './http/view';
+import webpack    from './http/webpack';
 
 const app = koa();
 const httpdoc = __dirname + '/../public';
@@ -23,13 +23,9 @@ app
   dest:   httpdoc + styles,
   prefix: styles
 }))
+.use(webpack(require('../webpack.config.dev.babel')))
 .use(router().get('/graphql', graphql()).routes())
-.use(router().get('/assets/js/:filename', browserify()).routes())
-.use(isomorph({
-  src: 'main',
-  cwd: __dirname + '/view/documents',
-  prefix: '/assets/js'
-}));
+.use(view());
 
 try {
   app.listen(1337);
