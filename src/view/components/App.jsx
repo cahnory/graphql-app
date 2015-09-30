@@ -1,7 +1,11 @@
 import React from 'react';
-import Foo from './foo';
+import Foo from './Foo';
+import Bar from './Bar';
+import NotFound from './NotFound';
+import { Router, Route, Link } from 'react-router';
+import IsoRouter from './IsoRouter';
 
-export default class App extends React.Component {
+export class App extends React.Component {
 
   componentWillMount() {
     this.state = {
@@ -30,10 +34,18 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <div>
-      Hello from <strong style={{ color: 'red' }}>{ this.state.renderSide }</strong> { this.state.counter }
-      { this.props.children } <Foo />
+    return <div>dedrfez
+      Hello from <strong style={{ color: 'green' }}>{ this.state.renderSide }</strong> { this.state.counter }
+      { this.props.children } <Foo /> <input type="text" /> foo
     </div>;
+  }
+
+}
+
+export default class AppRouter extends React.Component {
+
+  render() {
+    return <App>dz{ this.props.children }</App>;
   }
 
 }

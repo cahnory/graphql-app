@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 const globalKey = 'some_key';
 
 export default function createComponent(Component) {
-  class IsoComponent extends IsoRoot {
+  class IsoMorphComponent extends IsoMorph {
     constructor() {
       super();
       this.Component = Component;
     }
   }
 
-  autorender(IsoComponent);
+  autorender(IsoMorphComponent);
 
-  return IsoComponent;
+  return IsoMorphComponent;
 }
 
-export class IsoRoot extends React.Component {
+export class IsoMorph extends React.Component {
 
   componentWillMount() {
     this.setState(global[globalKey] ? global[globalKey] : this.props);
