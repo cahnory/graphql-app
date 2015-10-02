@@ -5,7 +5,7 @@ import NotFound from './NotFound';
 import { Router, Route, Link } from 'react-router';
 import IsoRouter from './IsoRouter';
 
-export class App extends React.Component {
+export default class App extends React.Component {
 
   componentWillMount() {
     this.state = {
@@ -38,14 +38,6 @@ export class App extends React.Component {
       Hello from <strong style={{ color: 'green' }}>{ this.state.renderSide }</strong> { this.state.counter }
       { this.props.children } <Foo /> <input type="text" /> foo
     </div>;
-  }
-
-}
-
-export default class AppRouter extends React.Component {
-
-  render() {
-    return <App>dz{ this.props.children }</App>;
   }
 
 }

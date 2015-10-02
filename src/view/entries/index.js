@@ -1,4 +1,12 @@
 import Isomorph from '../components/Isomorph';
-import App      from '../components/App';
+import createComponentFromElement from '../components/Isomorph';
 
-export default Isomorph(App);
+import React from 'react';
+import { Router, Route } from 'react-router';
+import App from '../components/App';
+
+let router = <Router>
+  <Route path="/" component={ App }></Route>
+</Router>;
+exports.router = router;
+export default createComponentFromElement(router);

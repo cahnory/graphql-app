@@ -15,6 +15,16 @@ export default function createComponent(Component) {
   return IsoMorphComponent;
 }
 
+export default function createComponentFromElement(element) {
+  class IsoMorphElement extends IsoMorph {
+    render() {
+      return <div>{ element }{ this.props.children }</div>;
+    }
+  }
+
+  return createComponent(IsoMorphElement);
+}
+
 export class IsoMorph extends React.Component {
 
   componentWillMount() {
