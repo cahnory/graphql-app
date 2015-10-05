@@ -3,17 +3,25 @@ import webpack from 'webpack';
 
 export default {
   devtool: 'source-map',
-  entry: [
-    './src/view/documents/main/index.js',
-    './src/view/entries/index'
-  ],
+  entry: {
+    app: [
+      './src/view'
+    ],
+    common: [
+      'react',
+      'react-dom',
+      'react-router',
+      'history/lib/createBrowserHistory'
+      //
+    ]
+  },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   output: {
     path: path.join(__dirname, 'public/assets/js'),
     filename: 'bundle_[hash].js',
-    publicPath: '/public/assets/js'
+    publicPath: '/assets/js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -21,7 +29,8 @@ export default {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin("common", "common.js")
   ],
   module: {
     loaders: [

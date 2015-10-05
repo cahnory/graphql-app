@@ -1,36 +1,43 @@
 import koa    from 'koa';
-import etag   from 'koa-etag';
-import gzip   from 'koa-gzip';
-import router from 'koa-router';
-import serve  from 'koa-static';
-
-import graphql    from './http/graphql';
-import sass       from './http/sass';
-import view       from './http/view';
-import webpack    from './http/webpack';
+import config from './config';
 
 const app = koa();
-const httpdoc = __dirname + '/../public';
-const styles  = '/assets/css';
+app.config = config;
 
+let boot = (name) => {
+  let bootModule = require('./boot/' + name);
 
-app
-.use(gzip())
-.use(etag())
-.use(serve(httpdoc))
-.use(sass({
-  src:    __dirname + '/styles/',
-  dest:   httpdoc + styles,
-  prefix: styles
+  return () => {
+    console.log('BOOT ' + name);
+    return bootModule(app);
+  }
+};
+
+(new Promise((resolve, reject) => {
+  console.log('BOOT START');
+  resolve(app);
 }))
-.use(webpack(require('../webpack.config.dev.babel')))
-.use(router().get('/graphql', graphql()).routes())
-.use(view());
-
-try {
-  app.listen(1337);
-  console.log('listening on port 1337');
-} catch (e) {
-  console.log(e);
+.then(boot('http'))
+.then(boot('assets'))
+.then(boot('graphql'))
+.then(boot('waterline'))
+.then(() => {
+  console.log('BOOT END');
+  return new Promise((resolve, reject) => {
+    try {
+      app.listen(app.config.http.port);
+      resolve();
+    } catch (e) {
+      reject(e);
+    }
+  });
+})
+.then(()=> {
+  console.log('listening on port ' + app.config.http.port);
+})
+.catch((err) => {
+  console.trace(err);
   process.exit();
-}
+});
+
+export default app;

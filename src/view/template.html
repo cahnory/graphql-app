@@ -8,5 +8,8 @@
   </head>
   <body>
     <div id="app">{{ app | safe }}</div>
+    {% for src in scripts %}
+    <script src="{{ src }}"></script>
+    {% endfor %}
   </body>
 </html>
