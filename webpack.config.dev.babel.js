@@ -28,13 +28,20 @@ export default {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin("common", "[name].js"),
-    new ExtractTextPlugin('public/assets/css/[name]_[contenthash].css', {
+    new ExtractTextPlugin('./public/assets/css/[name].css', {
       allChunks: true
     })
   ],
   module: {
     loaders: [
-      { test: /\.s?css$/,   loaders: ['style', 'css'] },
+      {
+        test: /\.s?css$/,
+        loaders: [
+          'style',
+          'css',
+          'sass?includePaths[]=' + path.resolve(__dirname, 'src/view/styles')
+        ]
+      },
       { test: /\.jsx?$/,  loaders: ['react-hot', 'babel'], include: path.resolve(__dirname, 'src') }
     ]
   }
