@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from './Link';
-require('../styles/index.scss');
 
 export default class Layout extends React.Component {
   componentWillMount() {

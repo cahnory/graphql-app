@@ -6,7 +6,8 @@ export default {
   devtool: 'source-map',
   entry: {
     bundle: [
-      './src/view'
+      './src/view',
+      './src/view/styles/index.scss'
     ],
     common: [
       'react',
@@ -28,11 +29,10 @@ export default {
     loaders: [
       {
         test: /\.s?css$/,
-        loaders: [
+        loader: ExtractTextPlugin.extract(
           'style',
-          'css',
-          'sass?includePaths[]=' + path.resolve(__dirname, 'src/view/styles')
-        ]
+          'css?sourceMap!sass?sourceMap&includePaths[]=' + path.resolve(__dirname, 'src/view/styles')
+        )
       },
       { test: /\.jsx?$/,  loaders: ['babel'], include: path.resolve(__dirname, 'src') }
     ]
@@ -45,8 +45,6 @@ export default {
       }
     }),
     new webpack.optimize.CommonsChunkPlugin('common', '[name]_[hash].js'),
-    new ExtractTextPlugin('public/assets/css/[name]_[contenthash].css', {
-      allChunks: true
-    })
+    new ExtractTextPlugin('../css/[name]_[hash].css')
   ]
 };

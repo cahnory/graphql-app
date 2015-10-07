@@ -20,8 +20,8 @@ let boot = (name) => {
 .then(boot('http'))
 .then(boot('render'))
 .then(boot('assets'))
-//.then(boot('graphql'))
-//.then(boot('waterline'))
+.then(boot('graphql'))
+.then(boot('waterline'))
 .then(() => {
   console.log('BOOT END');
   return new Promise((resolve, reject) => {
