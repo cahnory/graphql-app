@@ -1,10 +1,11 @@
 import path from 'path';
 import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default {
   devtool: 'eval',
   entry: {
-    app: [
+    bundle: [
       './src/view'
     ],
     common: [
@@ -20,17 +21,20 @@ export default {
   },
   output: {
     path: path.join(__dirname, 'public/assets/js'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/assets/js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin("common", "common.js")
+    new webpack.optimize.CommonsChunkPlugin("common", "[name].js"),
+    new ExtractTextPlugin('public/assets/css/[name]_[contenthash].css', {
+      allChunks: true
+    })
   ],
   module: {
     loaders: [
-      { test: /\.css$/,   loaders: ['style!css'] },
+      { test: /\.s?css$/,   loaders: ['style', 'css'] },
       { test: /\.jsx?$/,  loaders: ['react-hot', 'babel'], include: path.resolve(__dirname, 'src') }
     ]
   }

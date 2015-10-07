@@ -18,6 +18,7 @@ let boot = (name) => {
   resolve(app);
 }))
 .then(boot('http'))
+.then(boot('render'))
 .then(boot('assets'))
 .then(boot('graphql'))
 .then(boot('waterline'))
