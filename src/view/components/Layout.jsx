@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from './Link';
+require('../styles/index.scss');
 
 export default class Layout extends React.Component {
   componentWillMount() {
@@ -17,8 +18,9 @@ export default class Layout extends React.Component {
       
       <ul>
         <li><Link to="/">Dashboard</Link></li>
-        <li><Link to="/body">Body</Link></li>
+        <li><Link to="/bar">Bar</Link></li>
         <li><Link to="/foo">Foo</Link></li>
+        <li><Link to="/unknown">Unknown route</Link></li>
       </ul>
       <div>
         { this.props.children }

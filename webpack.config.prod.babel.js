@@ -26,7 +26,14 @@ export default {
   },
   module: {
     loaders: [
-      { test: /\.(?:s[ac]|c)ss$/,   loaders: ['style', 'css?sourceMap', 'sass?sourceMap&outputStyle=expanded'] },
+      {
+        test: /\.s?css$/,
+        loaders: [
+          'style',
+          'css',
+          'sass?includePaths[]=' + path.resolve(__dirname, 'src/view/styles')
+        ]
+      },
       { test: /\.jsx?$/,  loaders: ['babel'], include: path.resolve(__dirname, 'src') }
     ]
   },
@@ -37,6 +44,9 @@ export default {
         warnings: false
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin('common', '[name]_[hash].js')
+    new webpack.optimize.CommonsChunkPlugin('common', '[name]_[hash].js'),
+    new ExtractTextPlugin('public/assets/css/[name]_[contenthash].css', {
+      allChunks: true
+    })
   ]
 };
