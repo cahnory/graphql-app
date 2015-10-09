@@ -31,7 +31,7 @@ export default {
         test: /\.s?css$/,
         loader: ExtractTextPlugin.extract(
           'style',
-          'css?sourceMap!sass?sourceMap&includePaths[]=' + path.resolve(__dirname, 'src/view/styles')
+          'css?sourceMap!pleeease!sass?sourceMap&includePaths[]=src/view/styles'
         )
       },
       { test: /\.jsx?$/,  loaders: ['babel'], include: path.resolve(__dirname, 'src') }
@@ -46,5 +46,11 @@ export default {
     }),
     new webpack.optimize.CommonsChunkPlugin('common', '[name]_[hash].js'),
     new ExtractTextPlugin('../css/[name]_[hash].css')
-  ]
+  ],
+  pleeease: {
+    //stylus: true,
+    rem: ['10px'],
+    minifier: false,
+    mqpacker: false
+  }
 };

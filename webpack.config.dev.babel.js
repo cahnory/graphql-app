@@ -31,7 +31,8 @@ export default {
         loaders: [
           'style',
           'css',
-          'sass?includePaths[]=src/view/styles'// + path.resolve(__dirname, 'src/view/styles')
+          'pleeease',
+          'sass?includePaths[]=src/view/styles'
         ]
       },
       { test: /\.jsx?$/,  loaders: ['react-hot', 'babel'], include: path.resolve(__dirname, 'src') }
