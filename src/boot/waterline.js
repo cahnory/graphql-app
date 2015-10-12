@@ -6,8 +6,8 @@ export default function (app) {
     let waterline = new Waterline();
 
     // load models
-    fs.readdirSync(__dirname + '/../models').forEach((filename) => {
-      waterline.loadCollection(require(__dirname + '/../models/' + filename));
+    fs.readdirSync(__dirname + '/../data/database').forEach((filename) => {
+      waterline.loadCollection(require(__dirname + '/../data/database/' + filename));
     });
 
     waterline.initialize(app.config.waterline, (err, models) => {

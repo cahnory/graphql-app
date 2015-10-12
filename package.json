@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build:client": "webpack --config webpack.config.prod.babel.js",
+    "update-schema": "babel-node ./scripts/updateSchema.js",
     "install": "node scripts/install.js",
     "lint": "eslint --ext .js --ext .jsx src",
     "start": "node -r babel/register src/index.js",
@@ -15,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.23",
+    "babel-relay-plugin": "^0.2.6",
     "babelify": "^6.3.0",
     "console-polyfill": "^0.2.2",
     "css-loader": "^0.19.0",
@@ -36,7 +38,9 @@
     "pleeease-loader": "^1.0.0",
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1",
+    "react-relay": "^0.3.2",
     "react-router": "^1.0.0-rc1",
+    "react-router-relay": "^0.6.2",
     "sails-mysql": "^0.11.0",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.12.4",

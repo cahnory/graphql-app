@@ -34,7 +34,12 @@ export default {
           'css?sourceMap!pleeease!sass?sourceMap&includePaths[]=src/view/styles'
         )
       },
-      { test: /\.jsx?$/,  loaders: ['babel'], include: path.resolve(__dirname, 'src') }
+      {
+        test: /\.jsx?$/,
+        loaders: [
+          'babel?plugins[]=' + path.join(__dirname, 'webpack.graphql.js')
+        ],
+        include: path.resolve(__dirname, 'src') }
     ]
   },
   plugins: [

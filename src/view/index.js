@@ -1,10 +1,12 @@
 //import polyfill   from '../../utils/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
+import ReactRouterRelay from 'react-router-relay';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { Router } from 'react-router';
 import routes from './routes';
 
 let history = createBrowserHistory();
+let createElement = ReactRouterRelay.createElement;
 
-ReactDOM.render(React.createElement(Router, {history, routes}), document.getElementById('app'));
+ReactDOM.render(React.createElement(Router, {history, routes, createElement}), document.getElementById('app'));

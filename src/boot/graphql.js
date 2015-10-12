@@ -3,7 +3,7 @@ import graphql from 'koa-graphql';
 
 export default function (app) {
   app.use(router().get('/graphql', graphql({
-    schema: require('../schema/index.js')
+    schema: require('../data/schema')
   })).routes());
 }
 

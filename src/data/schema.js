@@ -5,8 +5,7 @@ import {
   GraphQLNonNull
 } from 'graphql/type';
 
-import UserType from './User';
-import UserModel from '../models/User';
+import UserType from './schema/User';
 
 import app from '../index';
 

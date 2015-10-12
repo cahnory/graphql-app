@@ -12,6 +12,8 @@ export default {
       'react',
       'react-dom',
       'react-router',
+      'react-relay',
+      'react-router-relay',
       'history/lib/createBrowserHistory',
       'webpack-hot-middleware/client'
     ]
@@ -35,7 +37,13 @@ export default {
           'sass?includePaths[]=src/view/styles'
         ]
       },
-      { test: /\.jsx?$/,  loaders: ['react-hot', 'babel'], include: path.resolve(__dirname, 'src') }
+      {
+        test: /\.jsx?$/,
+        loaders: [
+          'react-hot',
+          'babel?plugins[]=' + path.join(__dirname, 'webpack.graphql.js')
+        ],
+        include: path.resolve(__dirname, 'src') }
     ]
   },
   plugins: [
