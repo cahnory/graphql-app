@@ -1,14 +1,17 @@
 import {
+  GraphQLID,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt
+  GraphQLBoolean,
+  GraphQLNonNull
 } from 'graphql/type';
-
-let count = 0;
 
 export default new GraphQLObjectType({
   name: 'User',
   fields: () => ({
+    _id:{
+      type: new GraphQLNonNull(GraphQLID)
+    },
     username: {
       type: GraphQLString,
       description: 'The public name of the member.'
@@ -19,3 +22,8 @@ export default new GraphQLObjectType({
     }
   })
 });
+
+export const emptyUser = {
+  username: 'anonymous',
+  email: ''
+}

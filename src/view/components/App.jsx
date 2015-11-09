@@ -1,43 +1,30 @@
 import React from 'react';
-import Foo from './Foo';
-import Bar from './Bar';
-import NotFound from './NotFound';
-import { Router, Route, Link } from 'react-router';
-import IsoRouter from './IsoRouter';
+import Relay from 'react-relay';
 
-export default class App extends React.Component {
+import UserInfo from './UserInfo';
+import UserCreator from './UserCreator';
+import ViewerLogin from './ViewerLogin';
 
-  componentWillMount() {
-    this.state = {
-      renderSide: 'server',
-      counter: '--'
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      renderSide: 'browser',
-      counter: 0
-    });
-
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  tick() {
-    this.setState({
-      counter: this.state.counter + 10
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
+class App extends React.Component {
   render() {
-    return <div>dedrfez
-      Hello from <strong style={{ color: 'green' }}>{ this.state.renderSide }</strong> { this.state.counter }
-      { this.props.children } <Foo /> <input type="text" /> foo
-    </div>;
+    return (
+      <div>
+        You are in the app !
+        <UserCreator />
+        <ViewerLogin />
+        <UserInfo viewer={ this.props.viewer } />
+      </div>
+    );
   }
-
 }
+
+export default Relay.createContainer(App, {
+  fragments: {
+    viewer: () => Relay.QL`
+      fragment on Viewer {
+        ${UserInfo.getFragment('viewer')}
+      }
+    `
+    // ${UserCreator.getFragment('user')}
+  }
+});

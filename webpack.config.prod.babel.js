@@ -2,6 +2,11 @@ import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+let babelPlugins = [
+  //path.join(__dirname, 'webpack.graphql.js'),
+  'syntax-class-properties'
+];
+
 export default {
   devtool: 'source-map',
   entry: {
@@ -37,7 +42,7 @@ export default {
       {
         test: /\.jsx?$/,
         loaders: [
-          'babel?plugins[]=' + path.join(__dirname, 'webpack.graphql.js')
+          'babel?plugins[]=' + babelPlugins.join('&plugins[]=')
         ],
         include: path.resolve(__dirname, 'src') }
     ]

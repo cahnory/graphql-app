@@ -1,31 +1,13 @@
 import Relay from 'react-relay';
+import ReactRouterRelay from 'react-router-relay';
 
-import Layout   from './components/Layout';
-/*
-import NotFound from './components/NotFound';
-import Foo      from './components/Foo';
-import Bar      from './components/Bar';
-export const foo = {
-  path: 'foo',
-  component: Foo
-};
+import App   from './components/App';
 
-export const bar = {
-  path: 'bar',
-  component: Bar
-};
-
-export const notFound = {
-  path: '*',
-  component: NotFound
-};
-*/
 export default {
   path: '/',
-  component: Layout,/*
-  indexRoute: foo,
-  childRoutes: [foo, bar, notFound],*/
+  component: App,
+  createElement: ReactRouterRelay.createElement,
   queries: {
-    user: () => Relay.QL`query { user(id:1) {username, email} }`
+    viewer: () => Relay.QL`query { viewer }`
   }
 };

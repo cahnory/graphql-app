@@ -1,0 +1,48 @@
+input AddUserInput {
+  username: String!
+  email: String!
+  password: String!
+  clientMutationId: String!
+}
+
+type AddUserPayload {
+  user: User
+  clientMutationId: String!
+}
+
+input AuthViewerInput {
+  username: String!
+  password: String!
+  clientMutationId: String!
+}
+
+type AuthViewerPayload {
+  viewer: Viewer
+  clientMutationId: String!
+}
+
+type Mutation {
+  addUser(input: AddUserInput!): AddUserPayload
+  authViewer(input: AuthViewerInput!): AuthViewerPayload
+}
+
+interface Node {
+  id: ID!
+}
+
+type Root {
+  viewer: Viewer
+  user(id: Int!): User
+  node(id: ID!): Node
+}
+
+type User implements Node {
+  id: ID!
+  username: String
+  email: String
+}
+
+type Viewer implements Node {
+  id: ID!
+  account: User
+}

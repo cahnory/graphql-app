@@ -1,0 +1,37 @@
+type Credential {
+  username: String
+  password: String
+}
+
+type RootMutations {
+  userLogin(input: ToggleWidgetEnableInput!): ToggleWidgetEnablePayload
+  userLogout: Viewer
+}
+
+type RootQuery {
+  viewer: Viewer
+  user(id: ID): User
+}
+
+input ToggleWidgetEnableInput {
+  username: String!
+  password: String!
+  clientMutationId: String!
+}
+
+type ToggleWidgetEnablePayload {
+  widget: Viewer
+  clientMutationId: String!
+}
+
+type User {
+  _id: ID!
+  username: String
+  email: String
+}
+
+type Viewer {
+  clientMutationId: String
+  credential: Credential
+  account: User
+}

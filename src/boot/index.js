@@ -15,8 +15,9 @@ export default function boot(app, config) {
   .then(mount('http'))
   .then(mount('render'))
   .then(mount('assets'))
-  .then(mount('graphql'))
   .then(mount('waterline'))
+  .then(mount('passport'))
+  .then(mount('graphql'))
   .then(() => {
     console.log('BOOT END');
     return new Promise((resolve, reject) => {
@@ -32,7 +33,7 @@ export default function boot(app, config) {
     console.log('listening on port ' + app.config.http.port);
   })
   .catch((err) => {
-    console.trace(err);
+    console.trace(err.stack || err);
     process.exit();
   });
 }

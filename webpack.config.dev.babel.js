@@ -1,8 +1,13 @@
 import path from 'path';
 import webpack from 'webpack';
 
+let babelPlugins = [
+  //'syntax-class-properties',
+  path.join(__dirname, 'webpack.graphql.js')
+];
+
 export default {
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   entry: {
     bundle: [
       './src/view',
@@ -41,7 +46,7 @@ export default {
         test: /\.jsx?$/,
         loaders: [
           'react-hot',
-          'babel?plugins[]=' + path.join(__dirname, 'webpack.graphql.js')
+          'babel?stage=0&plugins[]=' + babelPlugins.join('&plugins[]=')
         ],
         include: path.resolve(__dirname, 'src') }
     ]

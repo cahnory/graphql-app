@@ -1,8 +1,0 @@
-type RootQueryType {
-  user(id: Int!): User
-}
-
-type User {
-  username: String
-  email: String
-}

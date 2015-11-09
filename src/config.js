@@ -4,6 +4,8 @@ export default {
   },
   publicPath: __dirname + '/../public',
 
+  keys: ['a secret key', 'and another one'],
+
   waterline: {
 
     adapters: {

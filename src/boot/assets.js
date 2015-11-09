@@ -1,4 +1,4 @@
-import sass       from '../middlewares/sass';
+//import sass       from '../middlewares/sass';
 import webpack    from '../middlewares/webpack';
 
 export default function (app) {
